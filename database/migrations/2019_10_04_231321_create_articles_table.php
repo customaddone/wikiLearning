@@ -17,8 +17,7 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('userId');
             $table->string('title');
-            $table->string('article')->nullable();
-            $table->dateTime('posted_at');
+            $table->text('article')->nullable();
             $table->string('status')->default('draft');
             $table->timestamps();
         });
