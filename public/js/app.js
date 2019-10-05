@@ -19269,26 +19269,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 /***/ }),
 
-/***/ "./resources/sass/scss/_all.scss":
-/*!***************************************!*\
-  !*** ./resources/sass/scss/_all.scss ***!
-  \***************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-
 /***/ 0:
-/*!*******************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/scss/_all.scss ***!
-  \*******************************************************************/
+/*!***********************************!*\
+  !*** multi ./resources/js/app.js ***!
+  \***********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/resources/sass/scss/_all.scss */"./resources/sass/scss/_all.scss");
+module.exports = __webpack_require__(/*! /var/www/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })
