@@ -7,14 +7,13 @@
         <a class="siimple-navbar-item" href="#">Home</a>
         <a class="siimple-navbar-item" href="#">About</a>
     </div>
-    <!-- このタイプのjqueryでないと動かないらしい-->
-    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-    <form name="myform">
-        キーワード：<input tyle="text" name="query" id="query" size="60" value="" />
-        <input type="button" name="execute" value="検索" onclick="WikipediaAPI();" />
-    </form>
-    <hr />
-    <div id="word"></div>
+
+    <div id="app">
+        <ul>
+            <li v-for="user in users">@{{ user.name }}</li>
+        </ul>
+    </div>
+
     <script src="{{ asset('js/wikiAPI.js') }}"></script>
     <!-- メインコンテンツのヘッダー -->
     <div class="siimple-jumbotron siimple-jumbotron--extra-large siimple-jumbotron--light">

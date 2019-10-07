@@ -14,6 +14,10 @@
     <!-- Styles -->
     <link href="{{ asset('css/_all.css') }}" rel="stylesheet">
 
+    <!-- Vueのインストールを行う -->
+    <script src="https://unpkg.com/vue@2.5.17"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.18.0/dist/axios.min.js"></script>
+
     <!-- Markdown Editor -->
     <!-- jQuery UIKit使う時にJQuery必要 -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -37,10 +41,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/2.27.5/js/components/htmleditor.js"></script>
 </head>
 <body>
-    <div id="app">
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+    <main class="py-4">
+        @yield('content')
+    </main>
 </body>
 </html>
