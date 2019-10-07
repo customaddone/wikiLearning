@@ -4,7 +4,13 @@ new Vue({
     users: []
   },
   mounted :function(){
-    axios.get('https://jsonplaceholder.typicode.com/users')
+    const list = {
+      name: 'Glenna Reichert'
+    }
+    axios.get('https://jsonplaceholder.typicode.com/users',
+            {
+              params: list,
+            })
           .then(response => this.users = response.data)
           .catch(response => console.log(response))
   }
