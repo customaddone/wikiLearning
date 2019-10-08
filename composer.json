@@ -11,6 +11,8 @@
         "php": "^7.2",
         "cebe/markdown": "^1.2",
         "fideloper/proxy": "^4.0",
+        "guzzlehttp/guzzle": "^6.3",
+        "illuminate/http": "^6.1",
         "laravel/framework": "^6.0",
         "laravel/tinker": "^1.0"
     },

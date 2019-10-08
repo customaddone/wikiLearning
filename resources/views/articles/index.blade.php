@@ -10,7 +10,7 @@
 
     <div id="app">
         <ul>
-            <li v-for="user in users">@{{ user.name }}</li>
+            <li>@{{ users }}</li>
         </ul>
     </div>
 

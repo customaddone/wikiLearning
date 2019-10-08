@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Illuminate\Support\Facades\Log;
 use Closure;
 
 class Cors
@@ -15,9 +16,17 @@ class Cors
      */
     public function handle($request, Closure $next)
     {
-        return $next($request)
-            ->header('Access-Control-Allow-Origin', '*')
-            ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
-            ->header('Access-Control-Allow-Headers', 'Content-Type, X-Requested-With');
+        $response = $next($request);
+
+        $http_origin = isset($_SERVER['HTTP_ORIGIN']) ? $_SERVER['HTTP_ORIGIN'] : "";
+
+        Log::debug("http_origin = " . $http_origin);
+        if ($http_origin == "http://localhost:8888") {
+            $response
+                ->header("Access-Control-Allow-Origin" , $http_origin)
+                ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
+        }
+
+        return $response;
     }
 }
