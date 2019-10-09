@@ -62,6 +62,7 @@
             <!-- formはいらないみたい -->
             キーワード：<input type="text" v-model="query.srsearch" size="60" placeholder="" />
             <input type="button" name="search" value="検索" v-on:click="wikiapi()" />
+            
             <div v-for="(user, index) in users" v-bind:key="index">
                 <div class="siimple-grid-col siimple-grid-col--4 siimple-grid-col--sm-12">
                     <div class="siimple-h2">@{{ users[index].title }}</div>

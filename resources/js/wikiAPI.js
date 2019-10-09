@@ -13,12 +13,13 @@ new Vue({
        origin: '*',
        srsearch: "",
      },
+     url: "https://en.wikipedia.org/w/api.php"
    },
    methods: {
      wikiapi: function () {
        // usersを空にしないと再度検索できない
        this.users = [];
-       axios.get( "https://en.wikipedia.org/w/api.php", {params: this.query})
+       axios.get(this.url, {params: this.query})
             .then((response) => {
                for(var i = 0; i < 3; i++) {
                // ３つだけ取って配列に入れる
