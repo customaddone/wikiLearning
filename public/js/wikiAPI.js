@@ -7,14 +7,21 @@ new Vue({
      query: {
        format: 'json',
        action: 'query',
-       list: 'search',
+       list: "search",
        origin: '*',
-       srsearch: 'AKIRA'
+       srsearch: "",
      },
    },
-   mounted :function(){
-     axios.get( "https://ja.wikipedia.org/w/api.php", {params: this.query})
-           .then(response => this.users = response.data)
-           .catch(response => console.log(response))
-   }
- })
+   methods: {
+     wikiapi: function () {
+       this.users = [];
+       axios.get( "https://en.wikipedia.org/w/api.php", {params: this.query})
+            .then((response) => {
+               for(var i = 0; i < 3; i++) {
+               // ３つだけ取って配列に入れる
+               this.users.push(response.data.query.search[i]);
+             }})
+            .catch(response => console.log(response));
+       }
+    }
+})
