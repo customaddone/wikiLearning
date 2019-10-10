@@ -20,3 +20,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['api']], function () {
     Route::match(["get", "options"], 'test', 'ArticlesController@index');
 });
+
+Route::group(['middleware' => ['api']], function () {
+    Route::post('wikishow', 'ArticlesController@wikishow');
+});

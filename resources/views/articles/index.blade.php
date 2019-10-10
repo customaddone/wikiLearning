@@ -62,17 +62,21 @@
             <!-- formはいらないみたい -->
             キーワード：<input type="text" v-model="query.srsearch" size="60" placeholder="" />
             <input type="button" name="search" value="検索" v-on:click="wikiapi()" />
-            
+
             <div v-for="(user, index) in users" v-bind:key="index">
                 <div class="siimple-grid-col siimple-grid-col--4 siimple-grid-col--sm-12">
-                    <div class="siimple-h2">@{{ users[index].title }}</div>
+                    <div class="siimple-h2">@{{ user.title }}</div>
                     <div class="siimple-paragraph siimple--text-justify">
                         <div v-html="users[index].snippet"></div>
                     </div>
                     <!-- Show -->
-                    <a href="" class=
-                        "siimple-btn siimple-btn--primary" style="margin-bottom:15px;">Show</a>
-                        <!-- Edit -->
+                    <form action="/api/wikishow" method="post">
+                        <input type="hidden" name="title" v-model="query.srsearch">
+                        <input type="hidden" name="body" v-model="usersshow">
+                        <input type="submit" class="siimple-btn siimple-btn--primary" style=
+                            "margin-bottom:15px;"  v-on:mouseover="wikiapishow(user)">
+                    </form>
+                    <!-- Edit -->
                     <a href="" class=
                         "siimple-btn siimple-btn--success" style="margin-bottom:15px;">Edit</a>
                 </div>

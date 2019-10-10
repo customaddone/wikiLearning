@@ -12,7 +12,7 @@ class ArticlesController extends Controller
         return view('articles.index', [ 'articles' => $articles ]);
     }
 
-    public function show($id) {
+    public function show($id = "") {
         $article = Article::find($id);
         return view('articles.show', [ 'article' => $article ]);
     }
@@ -49,5 +49,13 @@ class ArticlesController extends Controller
     {
         $article = Article::find($id)->delete();
         return redirect('/articles');
+    }
+
+    public function wikishow(Request $request)
+    {
+        return view('articles.show', [
+            'title' => $request->title,
+            'article' => $request->body
+        ]);
     }
 }
