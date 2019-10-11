@@ -22,13 +22,11 @@
                         <div v-html="user.snippet"></div>
                     </div>
                     <!-- Show -->
-                    <form action="/api/wikishow" method="post">
+                    <form name="form" id="form" action="/api/wikishow" method="post">
                         <input type="hidden" name="title" v-model="query.srsearch">
-                        <input type="hidden" name="body" v-model="usersshow">
+                        <input type="text" name="body" v-model="usersshow">
                         <div class="siimple-btn siimple-btn--primary" style=
                             "margin-bottom:15px;"  v-on:click="wikiapishow(user)">HTML生成</div>
-                        <input type="submit" class="siimple-btn siimple-btn--success" style=
-                            "margin-bottom:15px;" value="詳細">
                     </form>
                 </div>
             </div>

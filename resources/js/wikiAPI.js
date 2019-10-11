@@ -1,10 +1,11 @@
 // var vm = new Vue にしなくてもthisはVueインスタンス（グローバルオブジェクトではなく）
 // を取る？
-new Vue({
+var vm = new Vue({
    el: '#app',
    data: {
      users: [],
-     usersshow: [],
+     usersshow: "",
+     counter: 1,
      // 結局のところorigin=*を追加するだけでAccess-Control-Allow-Origin通過するみたい
      // なんで？
      query: {
@@ -39,9 +40,16 @@ new Vue({
        this.showquery.pageid = data.pageid;
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
-              this.usersshow.push(response.data.parse.text["*"]).removeAttribute( "href" ) ;
+              this.usersshow = response.data.parse.text["*"];
+              this.counter += 1;
             })
             .catch(response => console.log(response));
      }
   }
+})
+
+vm.$watch(function () {
+  return this.counter;
+}, function () {
+  document.forms.form.submit();
 })
