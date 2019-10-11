@@ -39,7 +39,7 @@ new Vue({
        this.showquery.pageid = data.pageid;
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
-              this.usersshow.push(response.data.parse.text["*"])
+              this.usersshow.push(response.data.parse.text["*"]).removeAttribute( "href" ) ;
             })
             .catch(response => console.log(response));
      }

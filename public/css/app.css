@@ -1,24 +1,5 @@
-.aaa {
-  padding: 10px;
+a {
+	pointer-events: none;
+	cursor: default;
+	text-decoration:none;
 }
-
-.bbb .button {
-  position: absolute;
-  top: 0;
-  padding: 10px 15px;
-  cursor: pointer;
-}
-
-.bbb .button:hover {
-  color: #f7ecb5;
-}
-
-.ccc {
-  display: block;
-  text-indent: 30px;
-  line-height: 30px;
-  font-size: 12px;
-  color: #999999;
-  border: none;
-}
-
