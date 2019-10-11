@@ -8,6 +8,7 @@ var vm = new Vue({
      counter: 1,
      // 結局のところorigin=*を追加するだけでAccess-Control-Allow-Origin通過するみたい
      // なんで？
+     // 検索用クエリパラメータ
      query: {
        format: 'json',
        action: 'query',
@@ -15,6 +16,7 @@ var vm = new Vue({
        origin: '*',
        srsearch: "",
      },
+     // 詳細画面検索用クエリパラメータ
      showquery: {
        format: 'json',
        action: 'parse',
@@ -24,6 +26,7 @@ var vm = new Vue({
      url: "https://en.wikipedia.org/w/api.php"
    },
    methods: {
+     // 検索
      wikiapi: function () {
        // usersを空にしないと再度検索できない
        this.users = [];
@@ -35,8 +38,11 @@ var vm = new Vue({
              }})
             .catch(response => console.log(response));
      },
+     // 詳細表示
      wikiapishow: function (data) {
        this.usersshow = [];
+       // viewからusersオブジェクト(data)を持ってきて、pageidを引き出す
+       // その値を検索用クエリパラメータに入れる
        this.showquery.pageid = data.pageid;
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
@@ -49,7 +55,6 @@ var vm = new Vue({
      }
   }
 })
-
 // カウンターの数字が変更になったらフォームを飛ばす
 // usersshow(記事内容)をwatchするとusershowを読む前にフォームが飛んでしまうので
 // counterでワンクッション
