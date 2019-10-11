@@ -24,7 +24,8 @@
                     <!-- Show -->
                     <form name="form" id="form" action="/api/wikishow" method="post">
                         <input type="hidden" name="title" v-model="query.srsearch">
-                        <input type="text" name="body" v-model="usersshow">
+                        <input type="hidden" name="body" v-model="usersshow">
+                        <!-- ボタン一つでHTML生成→詳細ページにジャンプできるようになった! -->
                         <div class="siimple-btn siimple-btn--primary" style=
                             "margin-bottom:15px;"  v-on:click="wikiapishow(user)">HTML生成</div>
                     </form>
