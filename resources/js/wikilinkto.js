@@ -17,13 +17,13 @@ var vm = new Vue({
        var pathname= location.pathname;
        var searchname = pathname.split("/");
        this.showquery.page = (searchname.length == 4) ? searchname[3] : "";
+       alert(this.showquery.page)
 
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
               // htmlが重すぎる　もう少しスリムに読み込めないか
               this.usersshow = response.data.parse.text["*"];
-              // 特に意味のないカウンター　vm.watchに拾ってもらう用
-              this.counter += 1;
+  
             })
             .catch(response => console.log(response));
     }

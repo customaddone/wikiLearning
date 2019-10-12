@@ -53,9 +53,6 @@ class ArticlesController extends Controller
 
     public function wikishow(Request $request)
     {
-        return view('articles.show', [
-            'title' => $request->title,
-            'article' => $request->body
-        ]);
+        return view('articles.show');
     }
 }
