@@ -6,9 +6,9 @@ var vm = new Vue({
      users: [],
      usersshow: "",
      counter: 1,
+     searchword: "",
      // 結局のところorigin=*を追加するだけでAccess-Control-Allow-Origin通過するみたい
      // なんで？
-     // 検索用クエリパラメータ
      query: {
        format: 'json',
        action: 'query',
@@ -16,33 +16,39 @@ var vm = new Vue({
        origin: '*',
        srsearch: "",
      },
-     // 詳細画面検索用クエリパラメータ
      showquery: {
        format: 'json',
        action: 'parse',
        origin: '*',
+       srlimit: 3,
        page: "",
      },
      url: "https://en.wikipedia.org/w/api.php"
    },
-   methods: {
-     // 検索
-     wikiapi: function () {
+   watch: {
+     searchword: function(newSearch) {
        // usersを空にしないと再度検索できない
-       this.users = [];
+       if (newSearch == "") {
+         this.users = [];
+       }
+       this.query.srsearch = newSearch;
        axios.get(this.url, {params: this.query})
             .then((response) => {
                for(var i = 0; i < 3; i++) {
                // ３つだけ取って配列に入れる
-               this.users.push(response.data.query.search[i]);
+               if (this.users.length < 3) {
+                 this.users.push(response.data.query.search[i]);
+               } else {
+                 this.users.shift();
+                 this.users.push(response.data.query.search[i]);
+               }
              }})
             .catch(response => console.log(response));
-     },
-     // 詳細表示
+     }
+   },
+   methods: {
      wikiapishow: function (data) {
        this.usersshow = [];
-       // viewからusersオブジェクト(data)を持ってきて、pageidを引き出す
-       // その値を検索用クエリパラメータに入れる
        this.showquery.page = data.title;
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
@@ -55,6 +61,7 @@ var vm = new Vue({
      }
   }
 })
+
 // カウンターの数字が変更になったらフォームを飛ばす
 // usersshow(記事内容)をwatchするとusershowを読む前にフォームが飛んでしまうので
 // counterでワンクッション
