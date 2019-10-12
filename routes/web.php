@@ -18,5 +18,5 @@ Route::get('/', function () {
 
 Route::resource('/articles', 'ArticlesController');
 
-Route::post('/articles/wikishow', 'ArticlesController@wikishow')->
+Route::get('/articles/wikishow/{pass?}', 'ArticlesController@wikishow')->
     middleware('articleFormatting');

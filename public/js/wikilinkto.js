@@ -3,7 +3,6 @@
 var vm = new Vue({
    el: '#article',
    data: {
-     users: [],
      usersshow: "",
 
      showquery: {
@@ -19,9 +18,6 @@ var vm = new Vue({
        var searchname = pathname.split("/");
        this.showquery.page = (searchname.length == 4) ? searchname[3] : "";
 
-       alert(this.showquery.page)
-       this.usersshow = [];
-       this.showquery.page = data.title;
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
               // htmlが重すぎる　もう少しスリムに読み込めないか

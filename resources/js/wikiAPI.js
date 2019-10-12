@@ -46,27 +46,4 @@ var vm = new Vue({
             .catch(response => console.log(response));
      }
    },
-   methods: {
-     wikiapishow: function (data) {
-       this.usersshow = [];
-       this.showquery.page = data.title;
-       axios.get(this.url, {params: this.showquery})
-            .then((response) => {
-              // htmlが重すぎる　もう少しスリムに読み込めないか
-              this.usersshow = response.data.parse.text["*"];
-              // 特に意味のないカウンター　vm.watchに拾ってもらう用
-              this.counter += 1;
-            })
-            .catch(response => console.log(response));
-     }
-  }
-})
-
-// カウンターの数字が変更になったらフォームを飛ばす
-// usersshow(記事内容)をwatchするとusershowを読む前にフォームが飛んでしまうので
-// counterでワンクッション
-vm.$watch(function () {
-  return this.counter;
-}, function () {
-  document.forms.form.submit();
 })

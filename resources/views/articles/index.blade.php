@@ -63,14 +63,10 @@
                         <div v-html="user.snippet"></div>
                     </div>
                     <!-- Show -->
-                    <form name="form" id="form" action="/articles/wikishow" method="post">
-                        {{ csrf_field() }}
-                        <input type="hidden" name="title" v-model="user.title">
-                        <input type="hidden" name="body" v-model="usersshow">
-                        <!-- ボタン一つでHTML生成→詳細ページにジャンプできるようになった! -->
-                        <div class="siimple-btn siimple-btn--primary" style=
-                            "margin-bottom:15px;"  v-on:click="wikiapishow(user)">HTML生成</div>
-                    </form>
+                    <a :href="'articles/wikishow/' + user.title " class=
+                            "siimple-btn siimple-btn--primary" style="margin-bottom:15px;">
+                        送信
+                    </a>
                 </div>
             </div>
         </div>
