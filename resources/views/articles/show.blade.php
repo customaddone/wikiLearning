@@ -20,6 +20,8 @@
         @keyup="selected"
         @click="selected">{!! $article !!}</div>
     </div>
+    <div id="article">@{{ usersshow }}</div>
     {{ $title }}
+    <script src="{{ asset('js/wikilinkto.js') }}"></script>
     <script src="{{ asset('js/selectedText.js') }}"></script>
 @endsection

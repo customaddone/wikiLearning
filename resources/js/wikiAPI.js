@@ -14,13 +14,13 @@ var vm = new Vue({
        action: 'query',
        list: "search",
        origin: '*',
+       srlimit: 3,
        srsearch: "",
      },
      showquery: {
        format: 'json',
        action: 'parse',
        origin: '*',
-       srlimit: 3,
        page: "",
      },
      url: "https://en.wikipedia.org/w/api.php"
