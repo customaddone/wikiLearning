@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\ArticleFormattingMiddleware;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,3 +17,6 @@ Route::get('/', function () {
 });
 
 Route::resource('/articles', 'ArticlesController');
+
+Route::post('/articles/wikishow', 'ArticlesController@wikishow')->
+    middleware('articleFormatting');

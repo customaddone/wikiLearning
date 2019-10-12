@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/_all.css": "/css/_all.css",
-    "/js/wikiAPI.js": "/js/wikiAPI.js"
+    "/js/wikiAPI.js": "/js/wikiAPI.js",
+    "/js/selectedText.js": "/js/selectedText.js"
 }

@@ -17,7 +17,7 @@ class CreateArticlesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('userId');
             $table->string('title');
-            $table->text('article')->nullable();
+            $table->mediumText('article')->nullable();
             $table->string('status')->default('draft');
             $table->timestamps();
         });

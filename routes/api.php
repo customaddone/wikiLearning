@@ -16,11 +16,3 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-Route::group(['middleware' => ['api']], function () {
-    Route::match(["get", "options"], 'test', 'ArticlesController@index');
-});
-
-Route::group(['middleware' => ['api']], function () {
-    Route::post('wikishow', 'ArticlesController@wikishow');
-});
