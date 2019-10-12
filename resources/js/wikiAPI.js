@@ -21,7 +21,7 @@ var vm = new Vue({
        format: 'json',
        action: 'parse',
        origin: '*',
-       pageid: "",
+       page: "",
      },
      url: "https://en.wikipedia.org/w/api.php"
    },
@@ -43,7 +43,7 @@ var vm = new Vue({
        this.usersshow = [];
        // viewからusersオブジェクト(data)を持ってきて、pageidを引き出す
        // その値を検索用クエリパラメータに入れる
-       this.showquery.pageid = data.pageid;
+       this.showquery.page = data.title;
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
               // htmlが重すぎる　もう少しスリムに読み込めないか

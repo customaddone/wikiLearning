@@ -15,7 +15,7 @@ class ArticleFormattingMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $pattern = '/<a .+?>(.+?)<\/a>/';
+        $pattern = '/<a .+?>(.+?)<(\/a|\/div)>/';
         $replace = '$1';
 
         $request->body = preg_replace($pattern, $replace, $request->body);
