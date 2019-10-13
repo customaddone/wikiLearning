@@ -20,9 +20,9 @@
         @keyup="selected"
         @click="selected"></div>
     </div>
-    <div id="article">
-        <div v-html="usersshow">
+    <div id='app'>
+        <wiki-show></wiki-show>
     </div>
-    <script src="{{ asset('js/wikilinkto.js') }}"></script>
+    <script src="{{ mix('js/main.js') }}"></script>
     <script src="{{ asset('js/selectedText.js') }}"></script>
 @endsection

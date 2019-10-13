@@ -1,4 +1,3 @@
-require('./bootstrap');
 
 Vue.component('wiki-show', require('./components/WikiShow.vue').default);
 
