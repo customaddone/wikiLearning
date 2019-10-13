@@ -131,10 +131,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&":
-/*!***********************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490& ***!
-  \***********************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -271,7 +271,7 @@ function normalizeComponent (
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _WikiShow_vue_vue_type_template_id_cc06e490___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WikiShow.vue?vue&type=template&id=cc06e490& */ "./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&");
+/* harmony import */ var _WikiShow_vue_vue_type_template_id_cc06e490_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./WikiShow.vue?vue&type=template&id=cc06e490&scoped=true& */ "./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&scoped=true&");
 /* harmony import */ var _WikiShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./WikiShow.vue?vue&type=script&lang=js& */ "./resources/js/components/WikiShow.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
@@ -283,11 +283,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
   _WikiShow_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _WikiShow_vue_vue_type_template_id_cc06e490___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _WikiShow_vue_vue_type_template_id_cc06e490___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _WikiShow_vue_vue_type_template_id_cc06e490_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _WikiShow_vue_vue_type_template_id_cc06e490_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "cc06e490",
   null
   
 )
@@ -313,19 +313,19 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&":
-/*!*****************************************************************************!*\
-  !*** ./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490& ***!
-  \*****************************************************************************/
+/***/ "./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&scoped=true&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&scoped=true& ***!
+  \*****************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WikiShow_vue_vue_type_template_id_cc06e490___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./WikiShow.vue?vue&type=template&id=cc06e490& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WikiShow_vue_vue_type_template_id_cc06e490___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WikiShow_vue_vue_type_template_id_cc06e490_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./WikiShow.vue?vue&type=template&id=cc06e490&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/WikiShow.vue?vue&type=template&id=cc06e490&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WikiShow_vue_vue_type_template_id_cc06e490_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WikiShow_vue_vue_type_template_id_cc06e490___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_WikiShow_vue_vue_type_template_id_cc06e490_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -22,7 +22,8 @@
     </div>
     <div id='app'>
         <wiki-show></wiki-show>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     </div>
-    <script src="{{ mix('js/main.js') }}"></script>
+    <script src="{{ asset('js/main.js') }}"></script>
     <script src="{{ asset('js/selectedText.js') }}"></script>
 @endsection

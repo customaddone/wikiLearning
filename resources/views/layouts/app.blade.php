@@ -13,7 +13,6 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/_all.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     <!-- Vueのインストールを行う -->
     <script src="https://unpkg.com/vue@2.5.17"></script>

@@ -50,6 +50,6 @@ export default {
 }
 </script>
 
-<style module>
+<style scoped>
 
 </style>
