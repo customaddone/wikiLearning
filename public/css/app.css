@@ -1,3 +1,9 @@
+/* wikipedia用css*/
+.wikipedia-container {
+  margin: 0 auto; 
+  width: 90%;
+}
+
 .client-js #mw-subcategories ul {
     list-style: none none;
     margin-left:0.25em
