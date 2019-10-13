@@ -15,8 +15,8 @@ class ArticleFormattingMiddleware
      */
     public function handle($request, Closure $next)
     {
-        $pattern = '/<a .+?>(.+?)<(\/a|\/div)>/';
-        $replace = '$1';
+        $pattern = '/<a href="\/wiki\/(.*?)".*?>(.+?)<\/a>/';
+        $replace = '<a href="/$1">$2</a>';
 
         $request->body = preg_replace($pattern, $replace, $request->body);
         return $next($request);

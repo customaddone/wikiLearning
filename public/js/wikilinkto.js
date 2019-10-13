@@ -16,15 +16,33 @@ var vm = new Vue({
    mounted: function () {
        var pathname= location.pathname;
        var searchname = pathname.split("/");
-       this.showquery.page = (searchname.length == 4) ? searchname[3] : "";
-       alert(this.showquery.page)
+       // スペースをアンダーバーに変えてエンコード
+       var underVarJoin = searchname[3].split("%20").join('_')
+       this.showquery.page = (searchname.length == 4) ? encodeURI(underVarJoin) : "";
 
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
-              // htmlが重すぎる　もう少しスリムに読み込めないか
-              this.usersshow = response.data.parse.text["*"];
-  
+
+              this.usersshow = response.data.parse.text["*"]
+
+                .replace(
+                //       wikiの記事で「File」（画像）を含まない
+                /<a href="\/wiki\/((?!File:).*?)".*?>(.+?)<\/a>/g,
+                // 新しいリンク
+                // /ではなく./にしないと/articles/wikishowが反映されない
+                '<a href="./$1">$2</a>')
+                // editと赤リンク（未編集)のリンクを消す
+                .replace(
+                /<a href="\/w\/index.*?".*?>(.*?)<\/a>/g,
+                '$1'
+                )
+                // helpのリンクがちゃんと貼れるようにする
+                .replace(
+                /<a href="((?=Help).*?)".*?>(.*?)<\/a>/g,
+                '$2'
+                );
+
             })
             .catch(response => console.log(response));
-    }
+    },
 })

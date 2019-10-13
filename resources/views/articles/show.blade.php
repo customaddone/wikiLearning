@@ -21,7 +21,7 @@
         @click="selected"></div>
     </div>
     <div id="article">
-        @{{ usersshow }}
+        <div v-html="usersshow">
     </div>
     <script src="{{ asset('js/wikilinkto.js') }}"></script>
     <script src="{{ asset('js/selectedText.js') }}"></script>
