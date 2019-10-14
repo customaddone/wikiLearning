@@ -104,6 +104,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -168,6 +169,8 @@ var render = function() {
       {
         on: {
           select: _vm.selected,
+          touchstart: _vm.selected,
+          touchmove: _vm.selected,
           blur: _vm.selected,
           keyup: _vm.selected,
           click: _vm.selected

@@ -1,7 +1,8 @@
 <template>
     <div>
         <p>選択中の文字:<span>{{ selectedText }}</span></p>
-        <div @select="selected" @blur="selected" @keyup="selected" @click="selected">
+        <div @select="selected" @touchstart= "selected" @touchmove="selected" @blur="selected" @keyup=
+            "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
     </div>
@@ -60,6 +61,8 @@ export default {
       }
   }
 }
+
+
 </script>
 
 <style scoped>

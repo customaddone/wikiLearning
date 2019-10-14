@@ -6,7 +6,9 @@
 
 
     <div id="app">
-        <wiki-show></wiki-show>
+        <div class="uk-container">
+            <wiki-show></wiki-show>
+        </div>
     </div>
 
     <script src="{{ asset('js/main.js') }}"></script>
