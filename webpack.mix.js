@@ -15,6 +15,7 @@ mix.js('resources/js/main.js', 'public/js/main.js')
     .scripts('resources/js/wikiAPI.js', 'public/js/wikiAPI.js')
     .scripts('resources/js/wikilinkto.js', 'public/js/wikilinkto.js')
     .scripts('resources/js/selectedText.js', 'public/js/selectedText.js')
+    .scripts('resources/js/highlightWord.js', 'public/js/highlightWord.js')
     .webpackConfig({
       externals: {
         "isomorphic-fetch": "fetch"

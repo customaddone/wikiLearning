@@ -49,7 +49,7 @@
                             <li>
                                 <a :href="'articles/wikishow/' + user.title " class=
                                     "siimple-btn siimple-btn--primary" style="margin-bottom:15px;">
-                                    <h3 class="uk-accordion-title">@{{ user.title }}
+                                    <h3 class="uk-accordion-title">
                                         <span style="font-size: 13px">detail</span>
                                     </h3>
                                 </a>

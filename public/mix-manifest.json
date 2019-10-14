@@ -2,5 +2,6 @@
     "/js/main.js": "/js/main.js",
     "/js/wikiAPI.js": "/js/wikiAPI.js",
     "/js/wikilinkto.js": "/js/wikilinkto.js",
-    "/js/selectedText.js": "/js/selectedText.js"
+    "/js/selectedText.js": "/js/selectedText.js",
+    "/js/highlightWord.js": "/js/highlightWord.js"
 }
