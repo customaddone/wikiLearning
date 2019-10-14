@@ -6,7 +6,6 @@
 
     <div id='app'>
         <div class="wikipedia-container">
-            <div style="margin-top: 50px;"></div>
             <wiki-show></wiki-show>
         <div class="wikipedia-container">
     </div>

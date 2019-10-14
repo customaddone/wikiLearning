@@ -1,5 +1,4 @@
-<div class="uk-section-primary" style="position: fixed; z-index:1;width: 100%;
-    border-bottom: dotted 5px #ffffff;">
+<div class="uk-section-primary" style="width: 100%; border-bottom: dotted 5px #ffffff;">
     <div class="uk-container">
         <nav class="uk-navbar">
             <div class="uk-navbar-left">
@@ -24,4 +23,3 @@
         </nav>
     </div>
 </div>
-<div style="padding-top: 40px;"></div>
