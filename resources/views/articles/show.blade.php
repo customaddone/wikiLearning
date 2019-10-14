@@ -1,29 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-   <form action="/articles" method="post">
-       {{ csrf_field() }}
-       <input type="hidden" name="userId" value="1">
-       <input type="hidden" name="title">
-       <input type="hidden" name="article">
-       <input type="hidden" name="status" value="wiki">
-       <button type="submit" class="siimple-btn siimple-btn--primary" style=
-        "margin-bottom:15px;">送信</button>
-    </form>
+    @component('components.nav')
+    @endcomponent
 
-    <div id="selectedWord">
-        <p>選択中の文字:<span>@{{ selectedText }}</span></p>
-
-        <div
-        @select="selected"
-        @blur="selected"
-        @keyup="selected"
-        @click="selected"></div>
-    </div>
     <div id='app'>
         <div class="wikipedia-container">
+            <div style="margin-top: 50px;"></div>
             <wiki-show></wiki-show>
-            <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <div class="wikipedia-container">
     </div>
     <script src="{{ asset('js/main.js') }}"></script>
