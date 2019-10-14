@@ -99,6 +99,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -109,7 +114,8 @@ __webpack_require__.r(__webpack_exports__);
         origin: '*',
         page: ""
       },
-      url: "https://en.wikipedia.org/w/api.php"
+      url: "https://en.wikipedia.org/w/api.php",
+      selectedText: ""
     };
   },
   mounted: function mounted() {
@@ -126,6 +132,11 @@ __webpack_require__.r(__webpack_exports__);
     })["catch"](function (response) {
       return console.log(response);
     });
+  },
+  methods: {
+    selected: function selected() {
+      this.selectedText = window.getSelection().toString();
+    }
   }
 });
 
@@ -146,7 +157,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { domProps: { innerHTML: _vm._s(_vm.usersshow) } })
+  return _c("div", [
+    _c("p", [
+      _vm._v("選択中の文字:"),
+      _c("span", [_vm._v(_vm._s(_vm.selectedText))])
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        on: {
+          select: _vm.selected,
+          blur: _vm.selected,
+          keyup: _vm.selected,
+          click: _vm.selected
+        }
+      },
+      [_c("div", { domProps: { innerHTML: _vm._s(_vm.usersshow) } })]
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -352,7 +381,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })

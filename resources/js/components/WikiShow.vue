@@ -1,5 +1,10 @@
 <template>
-    <div v-html="usersshow"></div>
+    <div>
+        <p>選択中の文字:<span>{{ selectedText }}</span></p>
+        <div @select="selected" @blur="selected" @keyup="selected" @click="selected">
+            <div v-html="usersshow"></div>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -14,7 +19,9 @@ export default {
         origin: '*',
         page: "",
         },
-      url: "https://en.wikipedia.org/w/api.php"
+      url: "https://en.wikipedia.org/w/api.php",
+
+      selectedText: "",
     }
   },
   mounted: function () {
@@ -47,6 +54,11 @@ export default {
          })
     .catch(response => console.log(response));
   },
+  methods: {
+      selected: function() {
+          this.selectedText = window.getSelection().toString();
+      }
+  }
 }
 </script>
 

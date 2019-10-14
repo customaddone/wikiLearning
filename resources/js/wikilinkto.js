@@ -11,7 +11,9 @@ var vm = new Vue({
        origin: '*',
        page: "",
      },
-     url: "https://en.wikipedia.org/w/api.php"
+     url: "https://en.wikipedia.org/w/api.php",
+
+     selectedText: "",
    },
    mounted: function () {
        var pathname= location.pathname;
@@ -23,8 +25,8 @@ var vm = new Vue({
        axios.get(this.url, {params: this.showquery})
             .then((response) => {
 
-              this.usersshow = response.data.parse.text["*"]
-
+              　this.usersshow = response.data.parse.text["*"]
+              　
                 .replace(
                 //       wikiの記事で「File」（画像）を含まない
                 /<a href="\/wiki\/((?!File:).*?)".*?>(.+?)<\/a>/g,
@@ -40,9 +42,24 @@ var vm = new Vue({
                 .replace(
                 /<a href="((?=Help).*?)".*?>(.*?)<\/a>/g,
                 '$2'
+                )
+
+                .replace(
+                /<div class="mw-parser-output">/,
+                '<div @select="selected" @blur="selected" @keyup="selected" @click="selected"><div class="mw-parser-output">'
                 );
 
             })
             .catch(response => console.log(response));
     },
+    methods: {
+        selected: function() {
+          this.selectedText = window.getSelection().toString();
+        },
+    }
 })
+
+// 文字列挿入用
+String.prototype.splice = function(idx, rem, s) {
+    return (this.slice(0, idx) + s + this.slice(idx + Math.abs(rem)));
+};

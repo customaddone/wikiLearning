@@ -4,11 +4,11 @@
     @component('components.nav')
     @endcomponent
 
-    <div id='app'>
-        <div class="wikipedia-container">
-            <wiki-show></wiki-show>
-        <div class="wikipedia-container">
+
+    <div id="app">
+        <wiki-show></wiki-show>
     </div>
+
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/selectedText.js') }}"></script>
+
 @endsection
