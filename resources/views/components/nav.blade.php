@@ -1,9 +1,9 @@
-<div class="uk-section-primary" style="position: fixed; width: 100%;
+<div class="uk-section-primary" style="position: fixed; z-index:1;width: 100%;
     border-bottom: dotted 5px #ffffff;">
     <div class="uk-container">
         <nav class="uk-navbar">
             <div class="uk-navbar-left">
-                <a href="../" class="uk-navbar-item uk-logo">
+                <a href="/articles" class="uk-navbar-item uk-logo">
                     <p style="font-size: 30px; font-family: Droid Sans;
                         margin-top: 13px;">
                         wikiLearning
