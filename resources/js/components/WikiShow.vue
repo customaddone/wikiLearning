@@ -1,7 +1,8 @@
 <template>
     <div>
+        <input type="button" v-on:click="unhighlight()" value="ハイライトを消す">
         <p>選択中文字:<span>{{ selectedText }}</span></p>
-        <div @select="selected" @touchstart="selected" @touchmove="textstate" @blur="selected" @keyup=
+        <div @select="selected" @touchstart="selected" @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
@@ -56,27 +57,6 @@ export default {
     .catch(response => console.log(response));
   },
   methods: {
-      textstate: function () {
-        this.selectedText = "textstate";
-      },
-      unhighlight: function () {
-        if (!(colour instanceof Colour)) {
-          colour = new Colour(colour);
-        }
-
-        if (node.nodeType == 1) {
-          var bg = node.style.backgroundColor;
-          if (bg && colour.equals(new Colour(bg))) {
-            node.style.backgroundColor = "";
-          }
-        }
-
-        var child = node.firstChild;
-        while (child) {
-          unhighlight(child, colour);
-          child = child.nextSibling;
-        }
-      },
       selected: function() {
           if (this.selectedText == "") {
             var userSelection =window.getSelection();
@@ -85,14 +65,29 @@ export default {
             var span = document.createElement("span");
             rangeObject.surroundContents(span);
             span.style.backgroundColor = "yellow";
-          } else {
+          }
+      },
+      unhighlight: function() {
+        var userSelection = window.getSelection();
+        var startRangeObject = userSelection.getRangeAt(0).startContainer;
+        var endRangeObject = userSelection.getRangeAt(0).endContainer;
 
-            alert('hello');
+        function deletehighlight(rangeparent) {
+          var parent = rangeparent.parentNode;
+          var child = parent.firstChild;
+          while (child) {
+            if (child.nodeType == 1) {
+              child.style.backgroundColor = "";
+            }
+            child = child.nextSibling;
           }
         }
+        deletehighlight(startRangeObject);
+        deletehighlight(endRangeObject);
+
       }
     }
-
+  }
 
 
 </script>

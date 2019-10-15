@@ -105,6 +105,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -135,39 +136,6 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    textstate: function textstate() {
-      this.selectedText = "textstate";
-    },
-    unhighlight: function (_unhighlight) {
-      function unhighlight() {
-        return _unhighlight.apply(this, arguments);
-      }
-
-      unhighlight.toString = function () {
-        return _unhighlight.toString();
-      };
-
-      return unhighlight;
-    }(function () {
-      if (!(colour instanceof Colour)) {
-        colour = new Colour(colour);
-      }
-
-      if (node.nodeType == 1) {
-        var bg = node.style.backgroundColor;
-
-        if (bg && colour.equals(new Colour(bg))) {
-          node.style.backgroundColor = "";
-        }
-      }
-
-      var child = node.firstChild;
-
-      while (child) {
-        unhighlight(child, colour);
-        child = child.nextSibling;
-      }
-    }),
     selected: function selected() {
       if (this.selectedText == "") {
         var userSelection = window.getSelection();
@@ -175,9 +143,28 @@ __webpack_require__.r(__webpack_exports__);
         var span = document.createElement("span");
         rangeObject.surroundContents(span);
         span.style.backgroundColor = "yellow";
-      } else {
-        alert('hello');
       }
+    },
+    unhighlight: function unhighlight() {
+      var userSelection = window.getSelection();
+      var startRangeObject = userSelection.getRangeAt(0).startContainer;
+      var endRangeObject = userSelection.getRangeAt(0).endContainer;
+
+      function deletehighlight(rangeparent) {
+        var parent = rangeparent.parentNode;
+        var child = parent.firstChild;
+
+        while (child) {
+          if (child.nodeType == 1) {
+            child.style.backgroundColor = "";
+          }
+
+          child = child.nextSibling;
+        }
+      }
+
+      deletehighlight(startRangeObject);
+      deletehighlight(endRangeObject);
     }
   }
 });
@@ -200,6 +187,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
+    _c("input", {
+      attrs: { type: "button", value: "ハイライトを消す" },
+      on: {
+        click: function($event) {
+          return _vm.unhighlight()
+        }
+      }
+    }),
+    _vm._v(" "),
     _c("p", [
       _vm._v("選択中文字:"),
       _c("span", [_vm._v(_vm._s(_vm.selectedText))])
@@ -211,7 +207,6 @@ var render = function() {
         on: {
           select: _vm.selected,
           touchstart: _vm.selected,
-          touchmove: _vm.textstate,
           blur: _vm.selected,
           keyup: _vm.selected,
           click: _vm.selected
