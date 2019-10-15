@@ -1,5 +1,9 @@
 <template>
     <div>
+        <h1 ハイライト機能テスト試行</h1>
+        <p>範囲指定して適当な場所を軽くタッチするとハイライトが付きます</p>
+        <p>範囲指定して小さく指をずらすとハイライトが消えます</p>
+        <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
         <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
