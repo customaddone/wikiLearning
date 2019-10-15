@@ -1,8 +1,6 @@
 <template>
     <div>
-        <input type="button" v-on:click="unhighlight()" value="ハイライトを消す">
-        <p>選択中文字:<span>{{ selectedText }}</span></p>
-        <div @select="selected" @touchstart="selected" @blur="selected" @keyup=
+        <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
