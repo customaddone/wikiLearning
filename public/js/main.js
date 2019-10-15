@@ -138,7 +138,6 @@ __webpack_require__.r(__webpack_exports__);
     selected: function selected() {
       var userSelection = window.getSelection();
       var rangeObject = userSelection.getRangeAt(0);
-      alert('hello');
       var span = document.createElement("span");
       rangeObject.surroundContents(span);
       span.style.backgroundColor = "yellow";
