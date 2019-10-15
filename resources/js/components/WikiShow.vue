@@ -87,12 +87,12 @@ export default {
             span.style.backgroundColor = "yellow";
           } else {
 
-            unhighlight(document.body, 'ffff00');
+            alert('hello');
           }
         }
       }
     }
-  
+
 
 
 </script>

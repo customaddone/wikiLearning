@@ -176,7 +176,7 @@ __webpack_require__.r(__webpack_exports__);
         rangeObject.surroundContents(span);
         span.style.backgroundColor = "yellow";
       } else {
-        unhighlight(document.body, 'ffff00');
+        alert('hello');
       }
     }
   }
