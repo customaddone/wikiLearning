@@ -169,7 +169,6 @@ var render = function() {
       {
         on: {
           select: _vm.selected,
-          touchstart: _vm.selected,
           touchmove: _vm.selected,
           blur: _vm.selected,
           keyup: _vm.selected,
