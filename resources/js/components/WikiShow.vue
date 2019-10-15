@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>選択中文字:<span>{{ selectedText }}</span></p>
-        <div @select="selected" @touchstart="selected" @blur="selected" @keyup=
+        <div @select="selected" @touchstart="selected" @touchmove="textstate" @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
@@ -56,16 +56,59 @@ export default {
     .catch(response => console.log(response));
   },
   methods: {
-      selected: function() {
-          var userSelection =window.getSelection();
-          var rangeObject = userSelection.getRangeAt(0);
+      textstate: function () {
+        this.selectedText = "textstate";
+      },
+      unhighlight: function () {
+        if (!(colour instanceof Colour)) {
+          colour = new Colour(colour);
+        }
 
-          var span = document.createElement("span");
-          rangeObject.surroundContents(span);
-          span.style.backgroundColor = "yellow";
+        if (node.nodeType == 1) {
+          var bg = node.style.backgroundColor;
+          if (bg && colour.equals(new Colour(bg))) {
+            node.style.backgroundColor = "";
+          }
+        }
+
+        var child = node.firstChild;
+        while (child) {
+          unhighlight(child, colour);
+          child = child.nextSibling;
+        }
+      },
+      selected: function() {
+          if (this.selectedText == "") {
+            var userSelection =window.getSelection();
+            var rangeObject = userSelection.getRangeAt(0);
+
+            var span = document.createElement("span");
+            rangeObject.surroundContents(span);
+            span.style.backgroundColor = "yellow";
+          } else {
+
+          function unhighlight(node, colour) {
+            if (!(colour instanceof Colour)) {
+              colour = new Colour(colour);
+            }
+
+            if (node.nodeType == 1) {
+              var bg = node.style.backgroundColor;
+              if (bg && colour.equals(new Colour(bg))) {
+                node.style.backgroundColor = "";
+              }
+            }
+
+            var child = node.firstChild;
+            while (child) {
+              unhighlight(child, colour);
+            child = child.nextSibling;
+            }
+          }
+        }
       }
+    }
   }
-}
 
 
 </script>
