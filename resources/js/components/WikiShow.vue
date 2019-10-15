@@ -87,28 +87,12 @@ export default {
             span.style.backgroundColor = "yellow";
           } else {
 
-          function unhighlight(node, colour) {
-            if (!(colour instanceof Colour)) {
-              colour = new Colour(colour);
-            }
-
-            if (node.nodeType == 1) {
-              var bg = node.style.backgroundColor;
-              if (bg && colour.equals(new Colour(bg))) {
-                node.style.backgroundColor = "";
-              }
-            }
-
-            var child = node.firstChild;
-            while (child) {
-              unhighlight(child, colour);
-            child = child.nextSibling;
-            }
+            unhighlight(document.body, 'ffff00');
           }
         }
       }
     }
-  }
+  
 
 
 </script>

@@ -135,8 +135,8 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
-    state: function state() {
-      this.selectedText = "state";
+    textstate: function textstate() {
+      this.selectedText = "textstate";
     },
     unhighlight: function (_unhighlight) {
       function unhighlight() {
@@ -176,27 +176,7 @@ __webpack_require__.r(__webpack_exports__);
         rangeObject.surroundContents(span);
         span.style.backgroundColor = "yellow";
       } else {
-        var _unhighlight2 = function _unhighlight2(node, colour) {
-          if (!(colour instanceof Colour)) {
-            colour = new Colour(colour);
-          }
-
-          if (node.nodeType == 1) {
-            var bg = node.style.backgroundColor;
-
-            if (bg && colour.equals(new Colour(bg))) {
-              node.style.backgroundColor = "";
-            }
-          }
-
-          var child = node.firstChild;
-
-          while (child) {
-            _unhighlight2(child, colour);
-
-            child = child.nextSibling;
-          }
-        };
+        unhighlight(document.body, 'ffff00');
       }
     }
   }
@@ -231,7 +211,7 @@ var render = function() {
         on: {
           select: _vm.selected,
           touchstart: _vm.selected,
-          touchmove: _vm.state,
+          touchmove: _vm.textstate,
           blur: _vm.selected,
           keyup: _vm.selected,
           click: _vm.selected
