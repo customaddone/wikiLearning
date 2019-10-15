@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>選択中の文字:<span>{{ selectedText }}</span></p>
+        <p>選択中文字:<span>{{ selectedText }}</span></p>
         <div @select="selected" @touchmove="selected" @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
@@ -57,7 +57,13 @@ export default {
   },
   methods: {
       selected: function() {
-          this.selectedText = window.getSelection().toString();
+          var userSelection =window.getSelection();
+          var rangeObject = userSelection.getRangeAt(0);
+          alert('hello');
+
+          var span = document.createElement("span");
+          rangeObject.surroundContents(span);
+          span.style.backgroundColor = "yellow";
       }
   }
 }

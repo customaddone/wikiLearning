@@ -136,7 +136,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selected: function selected() {
-      this.selectedText = window.getSelection().toString();
+      var userSelection = window.getSelection();
+      var rangeObject = userSelection.getRangeAt(0);
+      alert('hello');
+      var span = document.createElement("span");
+      rangeObject.surroundContents(span);
+      span.style.backgroundColor = "yellow";
     }
   }
 });
@@ -160,7 +165,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("p", [
-      _vm._v("選択中の文字:"),
+      _vm._v("選択中文字:"),
       _c("span", [_vm._v(_vm._s(_vm.selectedText))])
     ]),
     _vm._v(" "),
