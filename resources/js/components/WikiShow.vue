@@ -1,7 +1,7 @@
 <template>
     <div>
         <p>選択中文字:<span>{{ selectedText }}</span></p>
-        <div @select="selected" @touchmove="selected" @blur="selected" @keyup=
+        <div @select="selected" @touchstart="selected" @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
