@@ -3,7 +3,7 @@
         <p>範囲指定して適当な場所を軽くタッチするとハイライトが付きます</p>
         <p>ハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます</p>
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
-        <div @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
+        <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
@@ -77,12 +77,13 @@ export default {
         while (child) {
 
           if (child.nodeName == "SPAN") {
-            alert(child);
+
             var insertChild = document.createTextNode(child.innerHTML);
-            alert(insertChild.nodeName);
             var spanPalent = child.parentNode;
+
             spanPalent.insertBefore(insertChild, child);
             child.parentNode.removeChild(child);
+            
           }
 
           child = child.nextSibling;
