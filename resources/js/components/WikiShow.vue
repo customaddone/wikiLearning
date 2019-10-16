@@ -1,10 +1,9 @@
 <template>
     <div>
-        <h1 ハイライト機能テスト試行</h1>
         <p>範囲指定して適当な場所を軽くタッチするとハイライトが付きます</p>
-        <p>範囲指定して小さく指をずらすとハイライトが消えます</p>
+        <p>ハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます</p>
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
-        <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
+        <div @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="selected">
             <div v-html="usersshow"></div>
         </div>
@@ -74,19 +73,21 @@ export default {
         var startRangeObject = userSelection.getRangeAt(0).startContainer;
         var endRangeObject = userSelection.getRangeAt(0).endContainer;
 
-        function deletehighlight(rangeparent) {
-          var parent = rangeparent.parentNode;
-          var child = parent.firstChild;
-          while (child) {
-            if (child.nodeType == 1) {
-              child.style.backgroundColor = "";
-            }
-            child = child.nextSibling;
-          }
-        }
-        deletehighlight(startRangeObject);
-        deletehighlight(endRangeObject);
+        var child = startRangeObject
+        while (child) {
 
+          if (child.nodeName == "SPAN") {
+            alert(child);
+            var insertChild = document.createTextNode(child.innerHTML);
+            alert(insertChild.nodeName);
+            var spanPalent = child.parentNode;
+            spanPalent.insertBefore(insertChild, child);
+            child.parentNode.removeChild(child);
+          }
+
+          child = child.nextSibling;
+
+        }
       }
     }
   }
