@@ -1,7 +1,8 @@
 <template>
     <div>
         <p>範囲指定して適当な場所を軽くタッチするとハイライトが付きます</p>
-        <p>ハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます</p>
+        <p>長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲
+        が消えます）</p>
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
         <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="selected">
@@ -83,7 +84,7 @@ export default {
 
             spanPalent.insertBefore(insertChild, child);
             child.parentNode.removeChild(child);
-            
+
           }
 
           child = child.nextSibling;
