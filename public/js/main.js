@@ -108,7 +108,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -156,9 +155,8 @@ __webpack_require__.r(__webpack_exports__);
 
       while (child) {
         if (child.nodeName == "SPAN") {
-          alert(child);
-          var insertChild = document.createTextNode(child.innerHTML);
-          alert(insertChild.nodeName);
+          var insertChild = document.createTextNode(child.textContent);
+          alert(insertChild);
           var spanPalent = child.parentNode;
           spanPalent.insertBefore(insertChild, child);
           child.parentNode.removeChild(child);
@@ -188,21 +186,15 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("input", {
-      attrs: { type: "button", value: "highlight" },
-      on: { click: _vm.selected }
-    }),
-    _vm._v(" "),
-    _c("input", {
-      attrs: { type: "button", value: "delete" },
-      on: { click: _vm.unhighlight }
-    }),
-    _vm._v(" "),
     _c("p", [
       _vm._v("範囲指定して適当な場所を軽くタッチするとハイライトが付きます")
     ]),
     _vm._v(" "),
-    _c("p", [_vm._v("範囲指定して小さく指をずらすとハイライトが消えます")]),
+    _c("p", [
+      _vm._v(
+        "長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲\n    が消えます）"
+      )
+    ]),
     _vm._v(" "),
     _c("p", [
       _vm._v("※どうしてもハイライトが付かない部分、消えない部分があります")
@@ -212,7 +204,8 @@ var render = function() {
       "div",
       {
         on: {
-          "@touchstart": _vm.selected,
+          select: _vm.selected,
+          touchstart: _vm.selected,
           touchmove: _vm.unhighlight,
           blur: _vm.selected,
           keyup: _vm.selected,

@@ -10,7 +10,7 @@
                 </a>
             </div>
             <div class="uk-navbar-right">
-                <a uk-navbar-toggle-icon href="#" uk-toggle class="uk-hidden@m uk-icon
+                <a uk-navbar-toggle-icon href="" uk-toggle class="uk-hidden@m uk-icon
                     uk-navbar-toggle-icon">
                     <svg width="20" height="20" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg" data-svg="navbar-toggle-icon">
