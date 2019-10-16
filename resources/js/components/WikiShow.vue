@@ -86,10 +86,6 @@ export default {
             child.parentNode.removeChild(child);
 
           }
-          
-          if (child == endRangeObject) {
-            break;
-          }
 
           child = child.nextSibling;
 
