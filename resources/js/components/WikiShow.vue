@@ -80,7 +80,6 @@ export default {
           if (child.nodeName == "SPAN") {
 
             var insertChild = document.createTextNode(child.textContent);
-            alert(insertChild);
             var spanPalent = child.parentNode;
 
             spanPalent.insertBefore(insertChild, child);
