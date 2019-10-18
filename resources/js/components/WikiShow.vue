@@ -4,8 +4,22 @@
         <p>長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲
         が消えます）</p>
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
+        <div id="textbox" style="position: absolute; z-index: 3;
+            top: -500px; left: -500px; width:1;"">
+            <div class="uk-card uk-card-default uk-margin" style="width: 500px;">
+                <div class="uk-card-media-top">
+                    <div class="uk-cover-container">
+                    </div>
+                    <div class="uk-card-body">
+                        <h3 class="uk-card-title">{{ selectedText }}</h3>
+                        <p>智ちに働けば角かどが立つ。情じょうに棹さおさせば流される。意地を通とおせば窮屈きゅうくつだ。とかくに人の世は住みにくい。</p>
+                    </div>
+                    <div class="uk-card-footer"><a class="uk-text-muted" href="#">READ MORE</a></div>
+                </div>
+            </div>
+        </div>
         <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
-            "selected" @click="selected">
+            "selected" @click="textBoxClient">
             <div v-html="usersshow"></div>
         </div>
     </div>
@@ -26,6 +40,16 @@ export default {
       url: "https://en.wikipedia.org/w/api.php",
 
       selectedText: "",
+      translated: "",
+      translatedquery: {
+        Dic: 'EJdict',
+        word: "",
+        Scope: "HEADWORD",
+        Match: "STARTWITH",
+        Prof: 'application/json',
+        PageSize: 20,
+        PageIndex: 0,
+      },
     }
   },
   mounted: function () {
@@ -60,14 +84,13 @@ export default {
   },
   methods: {
       selected: function() {
-          if (this.selectedText == "") {
-            var userSelection =window.getSelection();
-            var rangeObject = userSelection.getRangeAt(0);
+          var userSelection =window.getSelection();
+          var rangeObject = userSelection.getRangeAt(0);
 
-            var span = document.createElement("span");
-            rangeObject.surroundContents(span);
-            span.style.backgroundColor = "yellow";
-          }
+          var span = document.createElement("span");
+          rangeObject.surroundContents(span);
+          span.style.backgroundColor = "yellow";
+
       },
       unhighlight: function() {
         var userSelection = window.getSelection();
@@ -90,6 +113,25 @@ export default {
           child = child.nextSibling;
 
         }
+      },
+      textBoxClient: function(event) {
+        this.selectedText = window.getSelection().toString();
+        this.translatedquery.word = this.selectedText;
+        alert(window.getSelection())
+
+        var eventCoordinateX = event.clientX;
+        var eventCoordinateY = event.clientY;
+
+        document.getElementById("textbox").style.top = (eventCoordinateY - 300) + 'px';
+        document.getElementById("textbox").style.left = (eventCoordinateX - 250) + 'px';
+
+        axios.get("/api/data")
+             .then((response) => {
+
+                this.translated = response.data;
+                alert(this.translated);
+             })
+             .catch(response => console.log(response));
       }
     }
   }

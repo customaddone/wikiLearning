@@ -108,6 +108,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -119,7 +133,17 @@ __webpack_require__.r(__webpack_exports__);
         page: ""
       },
       url: "https://en.wikipedia.org/w/api.php",
-      selectedText: ""
+      selectedText: "",
+      translated: "",
+      translatedquery: {
+        Dic: 'EJdict',
+        word: "",
+        Scope: "HEADWORD",
+        Match: "STARTWITH",
+        Prof: 'application/json',
+        PageSize: 20,
+        PageIndex: 0
+      }
     };
   },
   mounted: function mounted() {
@@ -139,13 +163,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     selected: function selected() {
-      if (this.selectedText == "") {
-        var userSelection = window.getSelection();
-        var rangeObject = userSelection.getRangeAt(0);
-        var span = document.createElement("span");
-        rangeObject.surroundContents(span);
-        span.style.backgroundColor = "yellow";
-      }
+      var userSelection = window.getSelection();
+      var rangeObject = userSelection.getRangeAt(0);
+      var span = document.createElement("span");
+      rangeObject.surroundContents(span);
+      span.style.backgroundColor = "yellow";
     },
     unhighlight: function unhighlight() {
       var userSelection = window.getSelection();
@@ -156,7 +178,6 @@ __webpack_require__.r(__webpack_exports__);
       while (child) {
         if (child.nodeName == "SPAN") {
           var insertChild = document.createTextNode(child.textContent);
-          alert(insertChild);
           var spanPalent = child.parentNode;
           spanPalent.insertBefore(insertChild, child);
           child.parentNode.removeChild(child);
@@ -164,6 +185,23 @@ __webpack_require__.r(__webpack_exports__);
 
         child = child.nextSibling;
       }
+    },
+    textBoxClient: function textBoxClient(event) {
+      var _this2 = this;
+
+      this.selectedText = window.getSelection().toString();
+      this.translatedquery.word = this.selectedText;
+      alert(window.getSelection());
+      var eventCoordinateX = event.clientX;
+      var eventCoordinateY = event.clientY;
+      document.getElementById("textbox").style.top = eventCoordinateY - 300 + 'px';
+      document.getElementById("textbox").style.left = eventCoordinateX - 250 + 'px';
+      axios.get("/api/data").then(function (response) {
+        _this2.translated = response.data;
+        alert(_this2.translated);
+      })["catch"](function (response) {
+        return console.log(response);
+      });
     }
   }
 });
@@ -203,20 +241,73 @@ var render = function() {
     _c(
       "div",
       {
+        staticStyle: {
+          position: "absolute",
+          "z-index": "3",
+          top: "-500px",
+          left: "-500px",
+          width: "1"
+        },
+        attrs: { id: "textbox" }
+      },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "uk-card uk-card-default uk-margin",
+            staticStyle: { width: "500px" }
+          },
+          [
+            _c("div", { staticClass: "uk-card-media-top" }, [
+              _c("div", { staticClass: "uk-cover-container" }),
+              _vm._v(" "),
+              _c("div", { staticClass: "uk-card-body" }, [
+                _c("h3", { staticClass: "uk-card-title" }, [
+                  _vm._v(_vm._s(_vm.selectedText))
+                ]),
+                _vm._v(" "),
+                _c("p", [
+                  _vm._v(
+                    "智ちに働けば角かどが立つ。情じょうに棹さおさせば流される。意地を通とおせば窮屈きゅうくつだ。とかくに人の世は住みにくい。"
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(0)
+            ])
+          ]
+        )
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
         on: {
           select: _vm.selected,
           touchstart: _vm.selected,
           touchmove: _vm.unhighlight,
           blur: _vm.selected,
           keyup: _vm.selected,
-          click: _vm.selected
+          click: _vm.textBoxClient
         }
       },
       [_c("div", { domProps: { innerHTML: _vm._s(_vm.usersshow) } })]
     )
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "uk-card-footer" }, [
+      _c("a", { staticClass: "uk-text-muted", attrs: { href: "#" } }, [
+        _vm._v("READ MORE")
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -420,7 +511,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })

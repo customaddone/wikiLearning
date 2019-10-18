@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
 {
+
     public function index() {
         $articles = Article::limit(3)->get();
         return view('articles.index', [ 'articles' => $articles ]);
@@ -53,6 +54,7 @@ class ArticlesController extends Controller
 
     public function wikishow(Request $request)
     {
-        return view('articles.show');
+        return response()->view('articles.show')->withHeaders(['hello' => 'world'
+        ]);
     }
 }

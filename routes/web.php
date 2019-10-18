@@ -18,4 +18,4 @@ Route::get('/', function () {
 
 Route::resource('/articles', 'ArticlesController');
 
-Route::get('/articles/wikishow/{pass?}', 'ArticlesController@wikishow');
+Route::match(["get", "options"],'/articles/wikishow/{pass?}', 'ArticlesController@wikishow');
