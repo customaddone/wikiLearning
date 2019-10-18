@@ -125,7 +125,7 @@ export default {
         document.getElementById("textbox").style.top = (eventCoordinateY - 300) + 'px';
         document.getElementById("textbox").style.left = (eventCoordinateX - 250) + 'px';
 
-        axios.get("/api/data")
+        axios.get("/api/data/" + this.translatedquery.word)
              .then((response) => {
 
                 this.translated = response.data;

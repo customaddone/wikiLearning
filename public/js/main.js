@@ -196,7 +196,7 @@ __webpack_require__.r(__webpack_exports__);
       var eventCoordinateY = event.clientY;
       document.getElementById("textbox").style.top = eventCoordinateY - 300 + 'px';
       document.getElementById("textbox").style.left = eventCoordinateX - 250 + 'px';
-      axios.get("/api/data").then(function (response) {
+      axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
         _this2.translated = response.data;
         alert(_this2.translated);
       })["catch"](function (response) {

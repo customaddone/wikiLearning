@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use Illuminate\Http\Request;
+use GuzzleHttp\Client;
 
 class ArticlesController extends Controller
 {
@@ -56,5 +57,29 @@ class ArticlesController extends Controller
     {
         return response()->view('articles.show')->withHeaders(['hello' => 'world'
         ]);
+    }
+
+    public function dict($pass)
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request(
+            'GET',
+            $url = "http://public.dejizo.jp/NetDicV09.asmx/SearchDicItemLite",
+            [ 'query' => [
+                'Dic' => 'EJdict',
+                'Word' => $pass,
+                'Scope' => 'HEADWORD',
+                'Match' => 'STARTWITH',
+                'Merge' => 'AND',
+                'Prof' => 'XHTML',
+                'PageSize' => 20,
+                'PageIndex' => 0
+            ]],
+            // パラメーターがあれば設定
+        );
+        // レスポンスボディを取得
+        $responseBody = $response->getBody()->getContents();
+        return $responseBody;
     }
 }
