@@ -18,7 +18,9 @@
                 </div>
             </div>
         </div>
-        <div style="position: fixed; display: flex; z-index: 3; top: 500px; left: 250px;">
+        <div style="position: fixed; display: flex; z-index: 3; top: 500px;
+            opacity: 0.4; left: 250px;">
+
             <button @click="switchWord" class="uk-button uk-button-primary">単語検索</button>
         </div>
         <div @select="selected" @touchstart="textBoxClient" @touchmove='unhighlight' @blur="selected" @keyup=

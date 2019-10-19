@@ -124,6 +124,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -135,9 +137,9 @@ __webpack_require__.r(__webpack_exports__);
         page: ""
       },
       url: "https://en.wikipedia.org/w/api.php",
-      selectedText: "",
+      selectedText: "使い方",
       searchWordId: "",
-      translated: "",
+      translated: "「単語検索」のボタンで表示切り替え、範囲指定＋適当なところをタッチで単語検索",
       wordShow: -1,
       translatedquery: {
         Dic: 'EJdict',
@@ -302,7 +304,8 @@ var render = function() {
           position: "fixed",
           display: "flex",
           "z-index": "3",
-          top: "450px",
+          top: "500px",
+          opacity: "0.5",
           left: "250px"
         }
       },
