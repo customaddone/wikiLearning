@@ -326,7 +326,6 @@ var render = function() {
         staticStyle: {
           position: "fixed",
           display: "flex",
-          "z-index": "3",
           "padding-top": "50%",
           opacity: "0.4",
           "padding-left": "65%"
@@ -600,7 +599,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })
