@@ -192,10 +192,11 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedText = window.getSelection().toString();
       this.translatedquery.word = this.selectedText;
-      var eventCoordinateX = event.clientX;
-      var eventCoordinateY = event.clientY;
-      document.getElementById("textbox").style.top = eventCoordinateY - 50 + 'px';
-      document.getElementById("textbox").style.left = eventCoordinateX - 50 + 'px';
+      var touchObject = event.changedTouches[0];
+      var eventCoordinateX = touchObject.clientX;
+      var eventCoordinateY = touchObject.clientY;
+      document.getElementById("textbox").style.top = eventCoordinateY + 2000 + 'px';
+      document.getElementById("textbox").style.left = eventCoordinateX + 'px';
       axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
         _this2.translated = "検索条件に一致する項目はありません...";
         var searchId = response.data.match(/(\d{6})/);
@@ -268,7 +269,7 @@ var render = function() {
             _c("div", { staticClass: "uk-card-media-top" }, [
               _c("div", { staticClass: "uk-cover-container" }),
               _vm._v(" "),
-              _c("div", { staticClass: "uk-card-body" }, [
+              _c("div", [
                 _c("h3", { staticClass: "uk-card-title" }, [
                   _vm._v(_vm._s(_vm.selectedText))
                 ]),
