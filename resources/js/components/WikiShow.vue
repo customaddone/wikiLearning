@@ -123,7 +123,7 @@ export default {
         var eventCoordinateX = event.clientX;
         var eventCoordinateY = event.clientY;
 
-        document.getElementById("textbox").style.top = (eventCoordinateY - 50) + 'px';
+        document.getElementById("textbox").style.top = (eventCoordinateY + 250) + 'px';
         document.getElementById("textbox").style.left = (eventCoordinateX - 50) + 'px';
 
         axios.get("/api/data/" + this.translatedquery.word)

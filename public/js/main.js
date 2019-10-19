@@ -194,8 +194,8 @@ __webpack_require__.r(__webpack_exports__);
       this.translatedquery.word = this.selectedText;
       var eventCoordinateX = event.clientX;
       var eventCoordinateY = event.clientY;
-      document.getElementById("textbox").style.top = eventCoordinateY - 300 + 'px';
-      document.getElementById("textbox").style.left = eventCoordinateX - 250 + 'px';
+      document.getElementById("textbox").style.top = eventCoordinateY - 50 + 'px';
+      document.getElementById("textbox").style.left = eventCoordinateX - 50 + 'px';
       axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
         _this2.translated = "検索条件に一致する項目はありません...";
         var searchId = response.data.match(/(\d{6})/);
@@ -262,7 +262,7 @@ var render = function() {
           "div",
           {
             staticClass: "uk-card uk-card-default uk-margin",
-            staticStyle: { width: "500px" }
+            staticStyle: { "font-size": "12px", width: "200px" }
           },
           [
             _c("div", { staticClass: "uk-card-media-top" }, [
@@ -275,7 +275,7 @@ var render = function() {
                 _vm._v(" "),
                 _c(
                   "p",
-                  { staticStyle: { height: "112px", overflow: "hidden" } },
+                  { staticStyle: { height: "50px", overflow: "hidden" } },
                   [_vm._v(_vm._s(_vm.translated))]
                 )
               ]),
@@ -292,7 +292,7 @@ var render = function() {
       {
         on: {
           select: _vm.selected,
-          touchstart: _vm.selected,
+          touchstart: _vm.textBoxClient,
           touchmove: _vm.unhighlight,
           blur: _vm.selected,
           keyup: _vm.selected,
@@ -518,7 +518,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })
