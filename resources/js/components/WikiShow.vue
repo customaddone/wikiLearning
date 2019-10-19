@@ -17,9 +17,8 @@
                     <div class="uk-card-footer"><a class="uk-text-muted" href="#">READ MORE</a></div>
                 </div>
             </div>
-            {{ wordShow }}
         </div>
-        <div style="position: fixed; display: flex; z-index: 3; top: 600px; left: 250px;">
+        <div style="position: fixed; display: flex; z-index: 3; top: 450px; left: 250px;">
             <button @click="switchWord" class="uk-button uk-button-primary">単語検索</button>
         </div>
         <div @select="selected" @touchstart="textBoxClient" @touchmove='unhighlight' @blur="selected" @keyup=
