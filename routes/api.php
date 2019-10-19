@@ -20,3 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get("/data/{pass}", "ArticlesController@dict"
 )->middleware('modify');
+
+Route::get("/datashow/{passId}", "ArticlesController@dictshow"
+)->middleware('modify');

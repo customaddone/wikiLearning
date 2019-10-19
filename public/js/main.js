@@ -134,6 +134,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       url: "https://en.wikipedia.org/w/api.php",
       selectedText: "",
+      searchWordId: "",
       translated: "",
       translatedquery: {
         Dic: 'EJdict',
@@ -191,14 +192,20 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedText = window.getSelection().toString();
       this.translatedquery.word = this.selectedText;
-      alert(window.getSelection());
       var eventCoordinateX = event.clientX;
       var eventCoordinateY = event.clientY;
       document.getElementById("textbox").style.top = eventCoordinateY - 300 + 'px';
       document.getElementById("textbox").style.left = eventCoordinateX - 250 + 'px';
       axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
-        _this2.translated = response.data;
-        alert(_this2.translated);
+        _this2.translated = "検索条件に一致する項目はありません...";
+        var searchId = response.data.match(/(\d{6})/);
+        _this2.searchWordId = searchId[0];
+        axios.get("/api/datashow/" + _this2.searchWordId).then(function (response) {
+          var means = response.data.match(/<div>(.*?)<\/div>/);
+          _this2.translated = means[1];
+        })["catch"](function (response) {
+          return console.log(response);
+        });
       })["catch"](function (response) {
         return console.log(response);
       });
@@ -266,11 +273,11 @@ var render = function() {
                   _vm._v(_vm._s(_vm.selectedText))
                 ]),
                 _vm._v(" "),
-                _c("p", [
-                  _vm._v(
-                    "智ちに働けば角かどが立つ。情じょうに棹さおさせば流される。意地を通とおせば窮屈きゅうくつだ。とかくに人の世は住みにくい。"
-                  )
-                ])
+                _c(
+                  "p",
+                  { staticStyle: { height: "112px", overflow: "hidden" } },
+                  [_vm._v(_vm._s(_vm.translated))]
+                )
               ]),
               _vm._v(" "),
               _vm._m(0)

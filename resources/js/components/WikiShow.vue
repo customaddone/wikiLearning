@@ -12,7 +12,7 @@
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ selectedText }}</h3>
-                        <p>智ちに働けば角かどが立つ。情じょうに棹さおさせば流される。意地を通とおせば窮屈きゅうくつだ。とかくに人の世は住みにくい。</p>
+                        <p style="height: 112px; overflow: hidden;">{{ translated }}</p>
                     </div>
                     <div class="uk-card-footer"><a class="uk-text-muted" href="#">READ MORE</a></div>
                 </div>
@@ -40,7 +40,9 @@ export default {
       url: "https://en.wikipedia.org/w/api.php",
 
       selectedText: "",
+      searchWordId: "",
       translated: "",
+
       translatedquery: {
         Dic: 'EJdict',
         word: "",
@@ -117,22 +119,31 @@ export default {
       textBoxClient: function(event) {
         this.selectedText = window.getSelection().toString();
         this.translatedquery.word = this.selectedText;
-        alert(window.getSelection())
 
         var eventCoordinateX = event.clientX;
         var eventCoordinateY = event.clientY;
 
-        document.getElementById("textbox").style.top = (eventCoordinateY - 300) + 'px';
+        document.getElementById("textbox").style.top = (eventCoordinateY - 400) + 'px';
         document.getElementById("textbox").style.left = (eventCoordinateX - 250) + 'px';
 
         axios.get("/api/data/" + this.translatedquery.word)
              .then((response) => {
+                this.translated = "検索条件に一致する項目はありません..."
+                var searchId = response.data.match(/(\d{6})/);
+                this.searchWordId = searchId[0]
 
-                this.translated = response.data;
-                alert(this.translated);
+                axios.get("/api/datashow/" + this.searchWordId)
+                      .then((response) => {
+
+                        var means = response.data.match(/<div>(.*?)<\/div>/)
+                        this.translated = means[1];
+
+                      })
+                      .catch(response => console.log(response));
+
              })
              .catch(response => console.log(response));
-      }
+      },
     }
   }
 

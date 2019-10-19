@@ -72,9 +72,29 @@ class ArticlesController extends Controller
                 'Scope' => 'HEADWORD',
                 'Match' => 'STARTWITH',
                 'Merge' => 'AND',
-                'Prof' => 'XHTML',
-                'PageSize' => 20,
+                'Prof' => 'JSON',
+                'PageSize' => 3,
                 'PageIndex' => 0
+            ]],
+            // パラメーターがあれば設定
+        );
+        // レスポンスボディを取得
+        $responseBody = $response->getBody()->getContents();
+        return $responseBody;
+    }
+
+    public function dictshow($passId)
+    {
+        $client = new \GuzzleHttp\Client();
+
+        $response = $client->request(
+            'GET',
+            $url = "http://public.dejizo.jp/NetDicV09.asmx/GetDicItemLite",
+            [ 'query' => [
+                'Dic' => 'EJdict',
+                'Item' => $passId,
+                'Loc' => "",
+                'Prof' => 'XHTML',
             ]],
             // パラメーターがあれば設定
         );
