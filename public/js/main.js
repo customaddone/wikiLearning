@@ -122,10 +122,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      usersshow: "",
+      article: "",
       showquery: {
         format: 'json',
         action: 'parse',
@@ -133,19 +142,11 @@ __webpack_require__.r(__webpack_exports__);
         page: ""
       },
       url: "https://en.wikipedia.org/w/api.php",
+      switchFunctionKey: 0,
+      translatedWord: "",
       selectedText: "使い方",
       searchWordId: "",
-      translated: "「単語検索」のボタンで表示切り替え、範囲指定＋適当なところをタッチで単語検索",
-      wordShow: -1,
-      translatedquery: {
-        Dic: 'EJdict',
-        word: "",
-        Scope: "HEADWORD",
-        Match: "STARTWITH",
-        Prof: 'application/json',
-        PageSize: 20,
-        PageIndex: 0
-      }
+      translated: "「単語検索」のボタンで表示切り替え、範囲指定＋適当なところをタッチで単語検索"
     };
   },
   mounted: function mounted() {
@@ -158,12 +159,49 @@ __webpack_require__.r(__webpack_exports__);
     axios.get(this.url, {
       params: this.showquery
     }).then(function (response) {
-      _this.usersshow = response.data.parse.text["*"].replace(/<a href="\/wiki\/((?!File:).*?)".*?>(.+?)<\/a>/g, '<a href="./$1">$2</a>').replace(/<a href="\/w\/index.*?".*?>(.*?)<\/a>/g, '$1').replace(/<a href="((?=Help).*?)".*?>(.*?)<\/a>/g, '$2');
+      _this.article = response.data.parse.text["*"].replace(/<a href="\/wiki\/((?!File:).*?)".*?>(.+?)<\/a>/g, '<a href="./$1">$2</a>').replace(/<a href="\/w\/index.*?".*?>(.*?)<\/a>/g, '$1').replace(/<a href="((?=Help).*?)".*?>(.*?)<\/a>/g, '$2');
     })["catch"](function (response) {
       return console.log(response);
     });
   },
   methods: {
+    switchKeyValue: function switchKeyValue() {
+      this.switchFunctionKey += 1;
+    },
+    switchWordFunction: function switchWordFunction() {
+      if (this.switchFunctionKey % 3 == 1) {
+        this.searchWordFunction();
+      } else if (this.switchFunctionKey % 3 == 2) {
+        this.selected();
+      }
+    },
+    switchUnhighlight: function switchUnhighlight() {
+      if (this.switchFunctionKey % 3 == 2) {
+        this.unhighlight();
+      }
+    },
+    searchWordFunction: function searchWordFunction(event) {
+      var _this2 = this;
+
+      if (window.getSelection().toString() !== "") {
+        this.selectedText = window.getSelection().toString();
+        this.translatedWord = this.selectedText;
+      }
+
+      axios.get("/api/data/" + this.translatedWord).then(function (response) {
+        var searchId = response.data.match(/(\d{6})/);
+        _this2.searchWordId = searchId[0];
+        axios.get("/api/datashow/" + _this2.searchWordId).then(function (response) {
+          var means = response.data.match(/<div>(.*?)<\/div>/);
+          _this2.translated = means[1];
+        })["catch"](function (response) {
+          return console.log(response);
+        });
+      })["catch"](function (response) {
+        console.log(response);
+        _this2.translated = "検索条件に一致する項目はありませんでした";
+      });
+    },
     selected: function selected() {
       var userSelection = window.getSelection();
       var rangeObject = userSelection.getRangeAt(0);
@@ -187,34 +225,6 @@ __webpack_require__.r(__webpack_exports__);
 
         child = child.nextSibling;
       }
-    },
-    textBoxClient: function textBoxClient(event) {
-      var _this2 = this;
-
-      if (window.getSelection().toString() !== "") {
-        this.selectedText = window.getSelection().toString();
-        this.translatedquery.word = this.selectedText;
-      }
-
-      axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
-        var searchId = response.data.match(/(\d{6})/);
-        _this2.searchWordId = searchId[0];
-        axios.get("/api/datashow/" + _this2.searchWordId).then(function (response) {
-          var means = response.data.match(/<div>(.*?)<\/div>/);
-          _this2.translated = means[1];
-        })["catch"](function (response) {
-          return console.log(response);
-        });
-      })["catch"](function (response) {
-        console.log(response);
-
-        if (window.getSelection().toString() !== "") {
-          _this2.translated = "検索条件に一致する項目はありませんでした...";
-        }
-      });
-    },
-    switchWord: function switchWord() {
-      this.wordShow = -this.wordShow;
     }
   }
 });
@@ -251,7 +261,7 @@ var render = function() {
         attrs: { id: "textbox" }
       },
       [
-        _vm.wordShow > 0
+        _vm.switchFunctionKey % 3 == 1
           ? _c(
               "div",
               {
@@ -281,7 +291,7 @@ var render = function() {
           : _vm._e()
       ]
     ),
-    _vm._v(" "),
+    _vm._v("\n    " + _vm._s(_vm.switchFunctionKey[0]) + "\n    "),
     _c(
       "div",
       {
@@ -295,14 +305,39 @@ var render = function() {
         }
       },
       [
-        _c(
-          "button",
-          {
-            staticClass: "uk-button uk-button-primary",
-            on: { click: _vm.switchWord }
-          },
-          [_vm._v("単語検索")]
-        )
+        _vm.switchFunctionKey % 3 == 0
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "uk-button uk-button-primary",
+                  on: { click: _vm.switchKeyValue }
+                },
+                [_vm._v("単語検索")]
+              )
+            ])
+          : _vm.switchFunctionKey % 3 == 1
+          ? _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "uk-button",
+                  staticStyle: { backgroundColor: "yellow" },
+                  on: { click: _vm.switchKeyValue }
+                },
+                [_vm._v("ハイライト")]
+              )
+            ])
+          : _c("div", [
+              _c(
+                "button",
+                {
+                  staticClass: "uk-button uk-button-muted",
+                  on: { click: _vm.switchKeyValue }
+                },
+                [_vm._v(" 解除 ")]
+              )
+            ])
       ]
     ),
     _vm._v(" "),
@@ -311,14 +346,14 @@ var render = function() {
       {
         on: {
           select: _vm.selected,
-          touchstart: _vm.textBoxClient,
-          touchmove: _vm.unhighlight,
+          touchstart: _vm.switchWordFunction,
+          touchmove: _vm.switchUnhighlight,
           blur: _vm.selected,
           keyup: _vm.selected,
-          click: _vm.textBoxClient
+          click: _vm.switchWordFunction
         }
       },
-      [_c("div", { domProps: { innerHTML: _vm._s(_vm.usersshow) } })]
+      [_c("div", { domProps: { innerHTML: _vm._s(_vm.article) } })]
     )
   ])
 }
@@ -537,7 +572,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })
