@@ -122,10 +122,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -211,7 +207,10 @@ __webpack_require__.r(__webpack_exports__);
         });
       })["catch"](function (response) {
         console.log(response);
-        _this2.translated = "検索条件に一致する項目はありませんでした...";
+
+        if (window.getSelection().toString() !== "") {
+          _this2.translated = "検索条件に一致する項目はありませんでした...";
+        }
       });
     },
     switchWord: function switchWord() {
@@ -238,20 +237,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("p", [
-      _vm._v("範囲指定して適当な場所を軽くタッチするとハイライトが付きます")
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v(
-        "長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲\n    が消えます）"
-      )
-    ]),
-    _vm._v(" "),
-    _c("p", [
-      _vm._v("※どうしてもハイライトが付かない部分、消えない部分があります")
-    ]),
-    _vm._v(" "),
     _c(
       "div",
       {

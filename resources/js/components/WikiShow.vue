@@ -1,9 +1,5 @@
 <template>
     <div>
-        <p>範囲指定して適当な場所を軽くタッチするとハイライトが付きます</p>
-        <p>長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲
-        が消えます）</p>
-        <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
         <div id="textbox" style="position: fixed;  display: flex; z-index: 3;
             top: 0px; left: 120px; width:1;"">
             <div v-if="wordShow > 0" class="uk-card uk-card-default uk-margin" style="width: 250px;">
@@ -121,7 +117,9 @@ export default {
              })
              .catch((response) => {
                 console.log(response);
-                this.translated = "検索条件に一致する項目はありませんでした...";
+                if (window.getSelection().toString() !== "") {
+                  this.translated = "検索条件に一致する項目はありませんでした...";
+                }
              });
       },
       switchWord: function() {
