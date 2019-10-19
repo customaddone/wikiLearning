@@ -10,7 +10,7 @@
                 <div class="uk-card-media-top">
                     <div class="uk-cover-container">
                     </div>
-                    <div>
+                    <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ selectedText }}</h3>
                         <p style="height: 50px; overflow: hidden;">{{ translated }}</p>
                     </div>
