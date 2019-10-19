@@ -27,7 +27,7 @@
                 <button @click="switchKeyValue" class="uk-button uk-button-primary">単語検索</button>
             </div>
             <div v-else-if="switchFunctionKey % 3 == 1">
-                <button @click="switchKeyValue" class="uk-button" style="backgroundColor: yellow;">ハイライト</button>
+                <button @click="switchKeyValue" class="uk-button" style="backgroundColor: yellow;">ライト</button>
             </div>
             <div v-else>
                 <button @click="switchKeyValue" class="uk-button uk-button-muted"> 解除 </button>
