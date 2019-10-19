@@ -10,9 +10,9 @@
                 <div class="uk-card-media-top">
                     <div class="uk-cover-container">
                     </div>
-                    <div>
+                    <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ selectedText }}</h3>
-                        <p style="height: 50px; overflow: hidden;">{{ translated }}</p>
+                        <p style="height: 80px; overflow: hidden;">{{ translated }}</p>
                     </div>
                     <div class="uk-card-footer"><a class="uk-text-muted" href="#">READ MORE</a></div>
                 </div>
@@ -125,8 +125,8 @@ export default {
         var eventCoordinateX = touchObject.clientX;
         var eventCoordinateY = touchObject.clientY;
 
-        document.getElementById("textbox").style.top = (eventCoordinateY + 1500) + 'px';
-        document.getElementById("textbox").style.left = (eventCoordinateX - 300) + 'px';
+        document.getElementById("textbox").style.top = (eventCoordinateY + 1200) + 'px';
+        document.getElementById("textbox").style.left = (eventCoordinateX - 100) + 'px';
 
         axios.get("/api/data/" + this.translatedquery.word)
              .then((response) => {
