@@ -120,8 +120,10 @@ export default {
         this.selectedText = window.getSelection().toString();
         this.translatedquery.word = this.selectedText;
 
-        var eventCoordinateX = event.clientX;
-        var eventCoordinateY = event.clientY;
+        var touchObject = event.changedTouches[0] ;
+
+        var eventCoordinateX = touchObject.clientX;
+        var eventCoordinateY = touchObject.clientY;
 
         document.getElementById("textbox").style.top = (eventCoordinateY + 250) + 'px';
         document.getElementById("textbox").style.left = (eventCoordinateX - 50) + 'px';
