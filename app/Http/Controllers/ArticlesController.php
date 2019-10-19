@@ -73,7 +73,7 @@ class ArticlesController extends Controller
                 'Match' => 'STARTWITH',
                 'Merge' => 'AND',
                 'Prof' => 'JSON',
-                'PageSize' => 3,
+                'PageSize' => 1,
                 'PageIndex' => 0
             ]],
             // パラメーターがあれば設定
