@@ -117,9 +117,7 @@ export default {
              })
              .catch((response) => {
                 console.log(response);
-                if (window.getSelection().toString() !== "") {
-                  this.translated = "検索条件に一致する項目はありませんでした...";
-                }
+                this.translated = "検索条件に一致する項目はありませんでした";
              });
       },
       switchWord: function() {
