@@ -201,7 +201,6 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
-        _this2.translated = "検索条件に一致する項目はありません...";
         var searchId = response.data.match(/(\d{6})/);
         _this2.searchWordId = searchId[0];
         axios.get("/api/datashow/" + _this2.searchWordId).then(function (response) {
@@ -211,7 +210,8 @@ __webpack_require__.r(__webpack_exports__);
           return console.log(response);
         });
       })["catch"](function (response) {
-        return console.log(response);
+        console.log(response);
+        _this2.translated = "検索条件に一致する項目はありませんでした...";
       });
     },
     switchWord: function switchWord() {
@@ -305,7 +305,7 @@ var render = function() {
           display: "flex",
           "z-index": "3",
           top: "500px",
-          opacity: "0.5",
+          opacity: "0.4",
           left: "250px"
         }
       },

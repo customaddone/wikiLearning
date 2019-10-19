@@ -109,7 +109,7 @@ export default {
 
         axios.get("/api/data/" + this.translatedquery.word)
              .then((response) => {
-                this.translated = "検索条件に一致する項目はありません..."
+
                 var searchId = response.data.match(/(\d{6})/);
                 this.searchWordId = searchId[0]
                 axios.get("/api/datashow/" + this.searchWordId)
@@ -119,7 +119,10 @@ export default {
                       })
                       .catch(response => console.log(response));
              })
-             .catch(response => console.log(response));
+             .catch((response) => {
+                console.log(response);
+                this.translated = "検索条件に一致する項目はありませんでした...";
+             });
       },
       switchWord: function() {
         this.wordShow = -this.wordShow;
