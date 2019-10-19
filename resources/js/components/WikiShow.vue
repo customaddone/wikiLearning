@@ -5,7 +5,7 @@
         が消えます）</p>
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
         <div id="textbox" style="position: fixed;  display: flex; z-index: 3;
-            top: 0px; left: 700px; width:1;"">
+            top: 0px; left: 0px; width:1;"">
             <div class="uk-card uk-card-default uk-margin" style="width: 250px;">
                 <div class="uk-card-media-top">
                     <div class="uk-cover-container">
