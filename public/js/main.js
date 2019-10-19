@@ -121,7 +121,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -190,13 +189,11 @@ __webpack_require__.r(__webpack_exports__);
     textBoxClient: function textBoxClient(event) {
       var _this2 = this;
 
-      this.selectedText = window.getSelection().toString();
-      this.translatedquery.word = this.selectedText;
-      var touchObject = event.changedTouches[0];
-      var eventCoordinateX = touchObject.clientX;
-      var eventCoordinateY = touchObject.clientY;
-      document.getElementById("textbox").style.top = eventCoordinateY + 2000 + 'px';
-      document.getElementById("textbox").style.left = eventCoordinateX + 'px';
+      if (window.getSelection().toString() !== "") {
+        this.selectedText = window.getSelection().toString();
+        this.translatedquery.word = this.selectedText;
+      }
+
       axios.get("/api/data/" + this.translatedquery.word).then(function (response) {
         _this2.translated = "検索条件に一致する項目はありません...";
         var searchId = response.data.match(/(\d{6})/);
@@ -250,10 +247,11 @@ var render = function() {
       "div",
       {
         staticStyle: {
-          position: "absolute",
+          position: "fixed",
+          display: "flex",
           "z-index": "3",
-          top: "-500px",
-          left: "-500px",
+          top: "0px",
+          left: "0px",
           width: "1"
         },
         attrs: { id: "textbox" }
@@ -263,20 +261,20 @@ var render = function() {
           "div",
           {
             staticClass: "uk-card uk-card-default uk-margin",
-            staticStyle: { "font-size": "12px", width: "200px" }
+            staticStyle: { width: "500px" }
           },
           [
             _c("div", { staticClass: "uk-card-media-top" }, [
               _c("div", { staticClass: "uk-cover-container" }),
               _vm._v(" "),
-              _c("div", [
+              _c("div", { staticClass: "uk-card-body" }, [
                 _c("h3", { staticClass: "uk-card-title" }, [
                   _vm._v(_vm._s(_vm.selectedText))
                 ]),
                 _vm._v(" "),
                 _c(
                   "p",
-                  { staticStyle: { height: "50px", overflow: "hidden" } },
+                  { staticStyle: { height: "112px", overflow: "hidden" } },
                   [_vm._v(_vm._s(_vm.translated))]
                 )
               ]),
@@ -519,7 +517,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })
