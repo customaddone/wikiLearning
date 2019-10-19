@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div style="position: fixed; display: flex; z-index: 3; top: 450px; left: 250px;">
+        <div style="position: fixed; display: flex; z-index: 3; top: 500px; left: 250px;">
             <button @click="switchWord" class="uk-button uk-button-primary">単語検索</button>
         </div>
         <div @select="selected" @touchstart="textBoxClient" @touchmove='unhighlight' @blur="selected" @keyup=
@@ -39,9 +39,9 @@ export default {
         page: "",
         },
       url: "https://en.wikipedia.org/w/api.php",
-      selectedText: "",
+      selectedText: "使い方",
       searchWordId: "",
-      translated: "",
+      translated: "「単語検索」のボタンで表示切り替え、範囲指定＋適当なところをタッチで単語検索",
       wordShow: -1,
       translatedquery: {
         Dic: 'EJdict',
