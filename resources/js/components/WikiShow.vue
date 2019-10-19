@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div @select="selected" @touchstart="selected" @touchmove='unhighlight' @blur="selected" @keyup=
+        <div @select="selected" @touchstart="textBoxClient" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="textBoxClient">
             <div v-html="usersshow"></div>
         </div>
@@ -123,7 +123,7 @@ export default {
         var eventCoordinateX = event.clientX;
         var eventCoordinateY = event.clientY;
 
-        document.getElementById("textbox").style.top = (eventCoordinateY - 400) + 'px';
+        document.getElementById("textbox").style.top = (eventCoordinateY - 200) + 'px';
         document.getElementById("textbox").style.left = (eventCoordinateX - 250) + 'px';
 
         axios.get("/api/data/" + this.translatedquery.word)

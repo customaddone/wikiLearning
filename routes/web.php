@@ -12,9 +12,7 @@ use App\Http\Middleware\ArticleFormattingMiddleware;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'ArticlesController@index');
 
 Route::resource('/articles', 'ArticlesController');
 
