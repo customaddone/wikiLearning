@@ -5,18 +5,22 @@
         が消えます）</p>
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
         <div id="textbox" style="position: fixed;  display: flex; z-index: 3;
-            top: 0px; left: 0px; width:1;"">
-            <div class="uk-card uk-card-default uk-margin" style="width: 250px;">
+            top: 0px; left: 120px; width:1;"">
+            <div v-if="wordShow > 0" class="uk-card uk-card-default uk-margin" style="width: 250px;">
                 <div class="uk-card-media-top">
                     <div class="uk-cover-container">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ selectedText }}</h3>
-                        <p style="height: 112px; overflow: hidden;">{{ translated }}</p>
+                        <p style="height: 105px; overflow: hidden;">{{ translated }}</p>
                     </div>
                     <div class="uk-card-footer"><a class="uk-text-muted" href="#">READ MORE</a></div>
                 </div>
             </div>
+            {{ wordShow }}
+        </div>
+        <div style="position: fixed; display: flex; z-index: 3; top: 600px; left: 250px;">
+            <button @click="switchWord" class="uk-button uk-button-primary">単語検索</button>
         </div>
         <div @select="selected" @touchstart="textBoxClient" @touchmove='unhighlight' @blur="selected" @keyup=
             "selected" @click="textBoxClient">
@@ -39,6 +43,7 @@ export default {
       selectedText: "",
       searchWordId: "",
       translated: "",
+      wordShow: -1,
       translatedquery: {
         Dic: 'EJdict',
         word: "",
@@ -115,6 +120,9 @@ export default {
              })
              .catch(response => console.log(response));
       },
+      switchWord: function() {
+        this.wordShow = -this.wordShow;
+      }
     }
   }
 </script>

@@ -121,6 +121,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -135,6 +139,7 @@ __webpack_require__.r(__webpack_exports__);
       selectedText: "",
       searchWordId: "",
       translated: "",
+      wordShow: -1,
       translatedquery: {
         Dic: 'EJdict',
         word: "",
@@ -207,6 +212,9 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (response) {
         return console.log(response);
       });
+    },
+    switchWord: function switchWord() {
+      this.wordShow = -this.wordShow;
     }
   }
 });
@@ -251,37 +259,63 @@ var render = function() {
           display: "flex",
           "z-index": "3",
           top: "0px",
-          left: "0px",
+          left: "120px",
           width: "1"
         },
         attrs: { id: "textbox" }
       },
       [
+        _vm.wordShow > 0
+          ? _c(
+              "div",
+              {
+                staticClass: "uk-card uk-card-default uk-margin",
+                staticStyle: { width: "250px" }
+              },
+              [
+                _c("div", { staticClass: "uk-card-media-top" }, [
+                  _c("div", { staticClass: "uk-cover-container" }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "uk-card-body" }, [
+                    _c("h3", { staticClass: "uk-card-title" }, [
+                      _vm._v(_vm._s(_vm.selectedText))
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "p",
+                      { staticStyle: { height: "105px", overflow: "hidden" } },
+                      [_vm._v(_vm._s(_vm.translated))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _vm._m(0)
+                ])
+              ]
+            )
+          : _vm._e(),
+        _vm._v("\n        " + _vm._s(_vm.wordShow) + "\n    ")
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticStyle: {
+          position: "fixed",
+          display: "flex",
+          "z-index": "3",
+          top: "600px",
+          left: "250px"
+        }
+      },
+      [
         _c(
-          "div",
+          "button",
           {
-            staticClass: "uk-card uk-card-default uk-margin",
-            staticStyle: { width: "500px" }
+            staticClass: "uk-button uk-button-primary",
+            on: { click: _vm.switchWord }
           },
-          [
-            _c("div", { staticClass: "uk-card-media-top" }, [
-              _c("div", { staticClass: "uk-cover-container" }),
-              _vm._v(" "),
-              _c("div", { staticClass: "uk-card-body" }, [
-                _c("h3", { staticClass: "uk-card-title" }, [
-                  _vm._v(_vm._s(_vm.selectedText))
-                ]),
-                _vm._v(" "),
-                _c(
-                  "p",
-                  { staticStyle: { height: "112px", overflow: "hidden" } },
-                  [_vm._v(_vm._s(_vm.translated))]
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(0)
-            ])
-          ]
+          [_vm._v("単語検索")]
         )
       ]
     ),
@@ -517,7 +551,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })
