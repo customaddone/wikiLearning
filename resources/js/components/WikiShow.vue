@@ -6,13 +6,13 @@
         <p>※どうしてもハイライトが付かない部分、消えない部分があります</p>
         <div id="textbox" style="position: absolute; z-index: 3;
             top: -500px; left: -500px; width:1;"">
-            <div class="uk-card uk-card-default uk-margin" style="width: 500px;">
+            <div class="uk-card uk-card-default uk-margin" style="font-size: 12px; width: 200px;">
                 <div class="uk-card-media-top">
                     <div class="uk-cover-container">
                     </div>
                     <div class="uk-card-body">
                         <h3 class="uk-card-title">{{ selectedText }}</h3>
-                        <p style="height: 112px; overflow: hidden;">{{ translated }}</p>
+                        <p style="height: 50px; overflow: hidden;">{{ translated }}</p>
                     </div>
                     <div class="uk-card-footer"><a class="uk-text-muted" href="#">READ MORE</a></div>
                 </div>
@@ -123,8 +123,8 @@ export default {
         var eventCoordinateX = event.clientX;
         var eventCoordinateY = event.clientY;
 
-        document.getElementById("textbox").style.top = (eventCoordinateY - 200) + 'px';
-        document.getElementById("textbox").style.left = (eventCoordinateX - 250) + 'px';
+        document.getElementById("textbox").style.top = (eventCoordinateY - 50) + 'px';
+        document.getElementById("textbox").style.left = (eventCoordinateX - 50) + 'px';
 
         axios.get("/api/data/" + this.translatedquery.word)
              .then((response) => {
