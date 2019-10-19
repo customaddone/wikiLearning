@@ -117,8 +117,10 @@ export default {
         }
       },
       textBoxClient: function(event) {
-        this.selectedText = window.getSelection().toString();
-        this.translatedquery.word = this.selectedText;
+        if (window.getSelection().toString() !== "") {
+          this.selectedText = window.getSelection().toString();
+          this.translatedquery.word = this.selectedText;
+        }
 
         var touchObject = event.changedTouches[0] ;
 
