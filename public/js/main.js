@@ -131,6 +131,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -255,7 +263,7 @@ var render = function() {
           display: "flex",
           "z-index": "3",
           top: "0px",
-          left: "120px",
+          "padding-left": "27%",
           width: "1"
         },
         attrs: { id: "textbox" }
@@ -291,7 +299,27 @@ var render = function() {
           : _vm._e()
       ]
     ),
-    _vm._v("\n    " + _vm._s(_vm.switchFunctionKey[0]) + "\n    "),
+    _vm._v(" "),
+    _c("p", [_vm._v("右下のボタンでモードを切り替えてください")]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "単語検索モード：単語１wordを範囲指定して適当な場所を押すと検索結果が右上に出ます"
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "ハイライトモード：範囲指定して適当な場所を軽くタッチするとハイライトが付きます"
+      )
+    ]),
+    _vm._v(" "),
+    _c("p", [
+      _vm._v(
+        "長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲\n    が消えます）"
+      )
+    ]),
+    _vm._v(" "),
     _c(
       "div",
       {
@@ -299,9 +327,9 @@ var render = function() {
           position: "fixed",
           display: "flex",
           "z-index": "3",
-          top: "500px",
+          "padding-top": "50%",
           opacity: "0.4",
-          left: "250px"
+          "padding-left": "65%"
         }
       },
       [
@@ -325,7 +353,7 @@ var render = function() {
                   staticStyle: { backgroundColor: "yellow" },
                   on: { click: _vm.switchKeyValue }
                 },
-                [_vm._v("ハイライト")]
+                [_vm._v("ライト")]
               )
             ])
           : _c("div", [

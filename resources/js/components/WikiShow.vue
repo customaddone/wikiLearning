@@ -2,7 +2,7 @@
     <div>
 
         <div id="textbox" style="position: fixed;  display: flex; z-index: 3;
-            top: 0px; left: 120px; width:1;"">
+            top: 0px; padding-left: 27%; width:1;"">
             <div v-if="switchFunctionKey % 3 == 1" class="uk-card uk-card-default uk-margin" style="width: 250px;">
                 <div class="uk-card-media-top">
                     <div class="uk-cover-container">
@@ -21,8 +21,8 @@
         <p>長押ししてハイライトの周りをグリグリするとして小さく指をずらすとハイライトが消えます（割と広範囲
         が消えます）</p>
 
-        <div style="position: fixed; display: flex; z-index: 3; top: 500px;
-            opacity: 0.4; left: 250px;">
+        <div style="position: fixed; display: flex; z-index: 3; padding-top: 50%;
+            opacity: 0.4; padding-left: 65%;">
             <div v-if="switchFunctionKey % 3 == 0">
                 <button @click="switchKeyValue" class="uk-button uk-button-primary">単語検索</button>
             </div>
