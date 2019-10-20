@@ -139,9 +139,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      /* mount時にwikiの記事を引っ張ってくるためのquery */
       article: "",
       showquery: {
         format: 'json',
@@ -150,20 +152,35 @@ __webpack_require__.r(__webpack_exports__);
         page: ""
       },
       url: "https://en.wikipedia.org/w/api.php",
+
+      /* 単語検索モード、ハイライトモード、標準モードを切り替える際のキー */
       switchFunctionKey: 0,
-      translatedWord: "",
+
+      /*
+        translatingWord 入力する単語
+        selectedText 表示する単語カードのタイトル
+        searchWordId axios1回目の通信で返ってきた記事のID
+        translated 表示する単語カードの本文
+      */
+      translatingWord: "",
       selectedText: "使い方",
       searchWordId: "",
       translated: "「単語検索」のボタンで表示切り替え、範囲指定＋適当なところをタッチで単語検索"
     };
   },
+
+  /* ページを開いた時に前のページからパスを受け取り、axiosでwikiの記事を引っ張ってくる */
   mounted: function mounted() {
     var _this = this;
 
+    /* 前のページからパス(wikiのページのタイトル)を受け取る */
     var pathname = location.pathname;
     var searchname = pathname.split("/");
     var underVarJoin = searchname[3].split("%20").join('_');
     this.showquery.page = searchname.length == 4 ? encodeURI(underVarJoin) : "";
+    /* axiosで記事を引っ張ってくる。その際、記事上のaリンクを加工する(./任意のタイトルでページを
+       開けるように) */
+
     axios.get(this.url, {
       params: this.showquery
     }).then(function (response) {
@@ -173,6 +190,8 @@ __webpack_require__.r(__webpack_exports__);
     });
   },
   methods: {
+    /* ボタンで単語検索モード、ハイライトモード、標準モードを切り替えて、touchstart,
+       touchmove, clickの挙動を変える */
     switchKeyValue: function switchKeyValue() {
       this.switchFunctionKey += 1;
     },
@@ -188,28 +207,71 @@ __webpack_require__.r(__webpack_exports__);
         this.unhighlight();
       }
     },
+
+    /* 単語検索を行う */
     searchWordFunction: function searchWordFunction(event) {
       var _this2 = this;
 
+      /* 検索ワードが空であれば何もしない */
       if (window.getSelection().toString() !== "") {
         this.selectedText = window.getSelection().toString();
-        this.translatedWord = this.selectedText;
+        this.translatingWord = this.selectedText;
+        var seeWord = this.selectedText;
       }
+      /* 選択した単語が名詞の複数形、動詞の過去形だった場合整形 */
 
-      axios.get("/api/data/" + this.translatedWord).then(function (response) {
-        var searchId = response.data.match(/(\d{6})/);
-        _this2.searchWordId = searchId[0];
-        axios.get("/api/datashow/" + _this2.searchWordId).then(function (response) {
-          var means = response.data.match(/<div>(.*?)<\/div>/);
-          _this2.translated = means[1];
-        })["catch"](function (response) {
-          return console.log(response);
+
+      var translateCut = function translateCut() {
+        /* es, s, ed, dが末尾にあれば切り取る */
+        var endword = ['es', 's', 'ed', 'd'];
+
+        for (var i = 0; i < endword.length; i++) {
+          var pattern = new RegExp('^(.+)' + endword[i] + '$');
+          var searchWord = seeWord.match(pattern);
+
+          if (searchWord) {
+            var cuttedWord = searchWord[0].replace(pattern, '$1');
+            return cuttedWord;
+          }
+        }
+
+        return seeWord;
+      };
+
+      this.researchAxios(this.translatingWord)["catch"](function () {
+        _this2.researchAxios(translateCut())["catch"](function () {
+          _this2.translated = "検索に一致する項目はありませんでした...";
         });
-      })["catch"](function (response) {
-        console.log(response);
-        _this2.translated = "検索条件に一致する項目はありませんでした";
       });
     },
+
+    /* デ辞蔵を使って単語検索->ヒットすればIDを取得して単語のページを検索
+       Guzzleを使ってクロスオリジン通信を行う */
+    researchAxios: function researchAxios(word) {
+      var _this3 = this;
+
+      return new Promise(function (resolve, reject) {
+        axios.get("/api/data/" + word).then(function (response) {
+          /* 戻ってきたデータからIDを取得 */
+          var searchId = response.data.match(/(\d{6})/);
+          _this3.searchWordId = searchId[0];
+          /* IDを用いて単語のページを検索 */
+
+          axios.get("/api/datashow/" + _this3.searchWordId).then(function (response) {
+            var means = response.data.match(/<div>(.*?)<\/div>/);
+            _this3.translated = means[1];
+            resolve();
+          })["catch"](function (response) {
+            return console.log(response);
+          });
+        })["catch"](function (response) {
+          console.log(response);
+          reject();
+        });
+      });
+    },
+
+    /* ハイライトを書く */
     selected: function selected() {
       var userSelection = window.getSelection();
       var rangeObject = userSelection.getRangeAt(0);
@@ -217,6 +279,8 @@ __webpack_require__.r(__webpack_exports__);
       rangeObject.surroundContents(span);
       span.style.backgroundColor = "yellow";
     },
+
+    /* ハイライトを外す */
     unhighlight: function unhighlight() {
       var userSelection = window.getSelection();
       var startRangeObject = userSelection.getRangeAt(0).startContainer;
@@ -255,50 +319,36 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c(
-      "div",
-      {
-        staticStyle: {
-          position: "fixed",
-          display: "flex",
-          "z-index": "3",
-          top: "0px",
-          "padding-left": "27%",
-          width: "1"
-        },
-        attrs: { id: "textbox" }
-      },
-      [
-        _vm.switchFunctionKey % 3 == 1
-          ? _c(
-              "div",
-              {
-                staticClass: "uk-card uk-card-default uk-margin",
-                staticStyle: { width: "250px" }
-              },
-              [
-                _c("div", { staticClass: "uk-card-media-top" }, [
-                  _c("div", { staticClass: "uk-cover-container" }),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "uk-card-body" }, [
-                    _c("h3", { staticClass: "uk-card-title" }, [
-                      _vm._v(_vm._s(_vm.selectedText))
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "p",
-                      { staticStyle: { height: "105px", overflow: "hidden" } },
-                      [_vm._v(_vm._s(_vm.translated))]
-                    )
+    _c("div", { staticClass: "showTextBox" }, [
+      _vm.switchFunctionKey % 3 == 1
+        ? _c(
+            "div",
+            {
+              staticClass: "uk-card uk-card-default uk-margin",
+              staticStyle: { width: "250px" }
+            },
+            [
+              _c("div", { staticClass: "uk-card-media-top" }, [
+                _c("div", { staticClass: "uk-cover-container" }),
+                _vm._v(" "),
+                _c("div", { staticClass: "uk-card-body" }, [
+                  _c("h3", { staticClass: "uk-card-title" }, [
+                    _vm._v(_vm._s(_vm.selectedText))
                   ]),
                   _vm._v(" "),
-                  _vm._m(0)
-                ])
-              ]
-            )
-          : _vm._e()
-      ]
-    ),
+                  _c(
+                    "p",
+                    { staticStyle: { height: "105px", overflow: "hidden" } },
+                    [_vm._v(_vm._s(_vm.translated))]
+                  )
+                ]),
+                _vm._v(" "),
+                _vm._m(0)
+              ])
+            ]
+          )
+        : _vm._e()
+    ]),
     _vm._v(" "),
     _c("p", [_vm._v("右下のボタンでモードを切り替えてください")]),
     _vm._v(" "),
@@ -320,53 +370,41 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticStyle: {
-          position: "fixed",
-          display: "flex",
-          "padding-top": "50%",
-          opacity: "0.4",
-          "padding-left": "65%"
-        }
-      },
-      [
-        _vm.switchFunctionKey % 3 == 0
-          ? _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "uk-button uk-button-primary",
-                  on: { click: _vm.switchKeyValue }
-                },
-                [_vm._v("単語検索")]
-              )
-            ])
-          : _vm.switchFunctionKey % 3 == 1
-          ? _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "uk-button",
-                  staticStyle: { backgroundColor: "yellow" },
-                  on: { click: _vm.switchKeyValue }
-                },
-                [_vm._v("ライト")]
-              )
-            ])
-          : _c("div", [
-              _c(
-                "button",
-                {
-                  staticClass: "uk-button uk-button-muted",
-                  on: { click: _vm.switchKeyValue }
-                },
-                [_vm._v(" 解除 ")]
-              )
-            ])
-      ]
-    ),
+    _c("div", { staticClass: "showSwitchButton" }, [
+      _vm.switchFunctionKey % 3 == 0
+        ? _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "uk-button uk-button-primary",
+                on: { click: _vm.switchKeyValue }
+              },
+              [_vm._v("単語検索")]
+            )
+          ])
+        : _vm.switchFunctionKey % 3 == 1
+        ? _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "uk-button",
+                staticStyle: { backgroundColor: "yellow" },
+                on: { click: _vm.switchKeyValue }
+              },
+              [_vm._v("ライト")]
+            )
+          ])
+        : _c("div", [
+            _c(
+              "button",
+              {
+                staticClass: "uk-button uk-button-muted",
+                on: { click: _vm.switchKeyValue }
+              },
+              [_vm._v(" 解除 ")]
+            )
+          ])
+    ]),
     _vm._v(" "),
     _c(
       "div",
@@ -599,7 +637,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /Users/fujisawakenyuu/sampleapp/laravel/wikiLearning/resources/js/main.js */"./resources/js/main.js");
+module.exports = __webpack_require__(/*! /var/www/resources/js/main.js */"./resources/js/main.js");
 
 
 /***/ })
